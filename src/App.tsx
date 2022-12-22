@@ -1,10 +1,21 @@
+import Routing from 'components/Routing'
+import Navbar from 'components/Topbar'
+import { Box } from '@mui/system'
+
 function App() {
     return (
-        <div className='App'>
-            <header className='App-header'>
-                <h1>Tabliczka</h1>
-            </header>
-        </div>
+        <Box
+            display='flex'
+            flexDirection='column'
+            alignItems='center'
+            sx={{
+                minHeight: '100vh',
+                backgroundColor: 'background.default',
+            }}
+        >
+            <Navbar />
+            <Routing />
+        </Box>
     )
 }
 
