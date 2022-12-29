@@ -1,20 +1,54 @@
-import Routing from 'components/Routing'
-import Navbar from 'components/Topbar'
-import { Box } from '@mui/system'
+import { Box, Theme } from '@mui/material'
 
-function App() {
+import {
+    RouterProvider,
+    createBrowserRouter,
+    createRoutesFromElements,
+    Route,
+} from 'react-router-dom'
+import RootLayout from './views/RootLayout'
+
+import StartPage from 'views/Home'
+import MathSettings from 'views/Math/MathSettings'
+import MathTest from 'views/Math/MathTest'
+import MathLayout from 'views/Math/MathLayout'
+import EnglishLayout from 'views/English/EnglishLayout'
+import EnglishSettings from 'views/English/EnglishSettings'
+import EnglishTest from 'views/English/EnglishTest'
+
+export const router = createBrowserRouter(
+    createRoutesFromElements(
+        <Route path='/' element={<RootLayout />}>
+            <Route index element={<StartPage />} />
+            <Route path='matematyka' element={<MathLayout />}>
+                <Route index element={<MathSettings />} />
+                <Route path='dodawanie' element={<MathTest />} />
+            </Route>
+            <Route path='angielski' element={<EnglishLayout />}>
+                <Route index element={<EnglishSettings />} />
+                <Route path='kolory' element={<EnglishTest />} />
+            </Route>
+        </Route>
+    )
+)
+
+const App: React.FC = () => {
     return (
         <Box
-            display='flex'
-            flexDirection='column'
-            alignItems='center'
-            sx={{
-                minHeight: '100vh',
-                backgroundColor: 'background.default',
+            sx={(theme: Theme) => {
+                return {
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    minHeight: '100vh',
+                    background: theme.palette.background.default,
+                    transitionProperty: 'background, color',
+                    transitionDuration: '0.5s',
+                    transitionTimingFunction: 'linear',
+                }
             }}
         >
-            <Navbar />
-            <Routing />
+            <RouterProvider router={router} />
         </Box>
     )
 }

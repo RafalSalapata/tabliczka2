@@ -12,6 +12,7 @@ const Topbar: React.FC = () => {
                     background: theme.palette.background.default,
                     width: '100%',
                     boxShadow: theme.shadows[0],
+                    transition: 'background 0.5s linear',
                 }
             }}
         >
@@ -24,7 +25,7 @@ const Topbar: React.FC = () => {
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignContent: 'center',
-                        padding: { xs: '0 12px', md: '0 24px' },
+                        padding: { xs: '0 6px', sm: '0 12px', md: '0 24px' },
                         height: { xs: '56px', md: '64px' },
                         minHeight: { xs: '56px', md: '64px' },
                         borderBottomColor: theme.palette.primary.main,
