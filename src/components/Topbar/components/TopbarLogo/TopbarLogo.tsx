@@ -1,4 +1,4 @@
-import { Button, Typography, ImageList, ImageListItem } from '@mui/material'
+import { Button, Typography, Box } from '@mui/material'
 
 const TopbarLogo: React.FC = () => {
     return (
@@ -11,17 +11,14 @@ const TopbarLogo: React.FC = () => {
                 height: { xs: '52px', md: '60px' },
             }}
         >
-            <ImageList
+            <Box
                 sx={{
                     height: { xs: '38px', sm: '43px', md: '48px' },
                     width: { xs: '38px', sm: '43px', md: '48px' },
                 }}
-                cols={1}
             >
-                <ImageListItem>
-                    <img src='assets/Numeracy.svg' srcSet='assets/Numeracy.svg' alt='Tabliczka' />
-                </ImageListItem>
-            </ImageList>
+                <img src='assets/Numeracy.svg' alt='Tabliczka' />
+            </Box>
             <Typography
                 fontFamily='Just Me Again Down Here'
                 // fontFamily='Splash'

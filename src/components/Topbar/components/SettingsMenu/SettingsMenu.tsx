@@ -76,7 +76,7 @@ const SettingsMenu: React.FC = () => {
                     }
                 >
                     <OptionStyled value='pl'>PL</OptionStyled>
-                    <OptionStyled value='en'>EN</OptionStyled>
+                    <OptionStyled value='cz'>CZ</OptionStyled>
                 </NativeSelect>
             </FormControl>
         </Box>

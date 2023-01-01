@@ -18,7 +18,14 @@ const RootLayout: React.FC = () => {
                 }}
             >
                 <Navigation />
-                <main>
+                <main
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        marginBottom: '20px',
+                    }}
+                >
                     <Outlet />
                 </main>
             </Box>

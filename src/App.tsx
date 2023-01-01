@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom'
 import RootLayout from './views/RootLayout'
 
-import StartPage from 'views/Home'
+import Home from 'views/Home'
 import MathSettings from 'views/Math/MathSettings'
 import MathTest from 'views/Math/MathTest'
 import MathLayout from 'views/Math/MathLayout'
@@ -19,7 +19,7 @@ import EnglishTest from 'views/English/EnglishTest'
 export const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path='/' element={<RootLayout />}>
-            <Route index element={<StartPage />} />
+            <Route index element={<Home />} />
             <Route path='matematyka' element={<MathLayout />}>
                 <Route index element={<MathSettings />} />
                 <Route path='dodawanie' element={<MathTest />} />
