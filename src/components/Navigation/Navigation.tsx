@@ -29,7 +29,7 @@ const BreadcrumbLinkStyled = styled(RouterLink)(({ theme }) => {
         '&:hover': {
             color: theme.palette.primary.main,
         },
-        transitionProperty: ['background', 'color'],
+        transitionProperty: 'background, color',
         transitionDuration: '0.5s',
         transitionTimingFunction: 'linear',
     }

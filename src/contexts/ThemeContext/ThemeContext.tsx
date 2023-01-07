@@ -1,5 +1,5 @@
 import { createTheme, Theme, ThemeProvider } from '@mui/material'
-import { blue, green, grey, lightBlue } from '@mui/material/colors'
+import { blue, grey, lightBlue } from '@mui/material/colors'
 import { createContext, useMemo, useState } from 'react'
 import { IThemeContext, ThemeMode, IThemeContextProvider } from './ThemeContextTypes'
 
@@ -57,7 +57,8 @@ export const ThemeContextProvider = ({ children }: IThemeContextProvider) => {
             palette: {
                 mode: mode,
                 primary: {
-                    main: isModeLight ? green[800] : green['A100'],
+                    main: '#52af77',
+                    // main: isModeLight ? green[800] : green['A100'],
                     // main: isModeLight ? '#f1356d' : '#eb4c7b', // previous version of red details
                 },
                 background: {
@@ -72,7 +73,7 @@ export const ThemeContextProvider = ({ children }: IThemeContextProvider) => {
                 fontFamily: 'Quicksand',
             },
             shape: {
-                borderRadius: '5px',
+                borderRadius: 5,
             },
             gradiend: isModeLight
                 ? 'radial-gradient( circle farthest-corner at 7.2% 99.6%,  rgba(37,249,245,1) 0%, rgba(8,70,218,1) 90% );' // 'linear-gradient(135deg, rgba(3,0,255,1) 0%, rgba(0,125,255,1) 50%, rgba(0,215,255,1) 100%)'

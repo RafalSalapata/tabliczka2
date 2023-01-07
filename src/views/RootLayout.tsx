@@ -12,8 +12,7 @@ const RootLayout: React.FC = () => {
                     return {
                         paddingX: theme.spacing(1),
                         paddingY: theme.spacing(0.5),
-                        width: '100%',
-                        maxWidth: '800px',
+                        width: 'min(100%, 400px)',
                     }
                 }}
             >
