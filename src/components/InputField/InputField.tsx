@@ -21,11 +21,16 @@ const InputField: React.FC<IInputFieldProps> = ({ value, label, setValue }) => {
             fullWidth
             onChange={handleChange}
             inputProps={{
-                sx: { fontSize: '26px', height: '60px', paddingY: '0px' },
+                sx: {
+                    fontSize: '26px',
+                    height: '60px',
+                    paddingY: '0px',
+                    transition: (theme: Theme) => theme.customTransitions.onThemeChange,
+                },
             }}
             sx={(theme: Theme) => {
                 return {
-                    mt: '30px',
+                    mt: theme.shape.marginTop,
                     lineHeight: '0px',
                     '& label.Mui-focused': {
                         color: theme.palette.primary.main,

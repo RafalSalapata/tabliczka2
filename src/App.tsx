@@ -42,9 +42,7 @@ const App: React.FC = () => {
                     alignItems: 'center',
                     minHeight: '100vh',
                     background: theme.palette.background.default,
-                    transitionProperty: 'background, color',
-                    transitionDuration: '0.5s',
-                    transitionTimingFunction: 'linear',
+                    transition: theme.customTransitions.onThemeChange,
                 }
             }}
         >

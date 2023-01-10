@@ -11,7 +11,14 @@ const MainButton: React.FC<IMainButtonProps> = ({
     handleClick,
 }: IMainButtonProps) => {
     return (
-        <Box sx={{ width: '100%', mt: { xs: '25px', sm: '30px' } }}>
+        <Box
+            sx={(theme: Theme) => {
+                return {
+                    width: '100%',
+                    mt: theme.shape.marginTop,
+                }
+            }}
+        >
             <Link
                 to={navigateTo}
                 style={{ height: '60px', borderRadius: '5px', textDecoration: 'none' }}
@@ -34,9 +41,7 @@ const MainButton: React.FC<IMainButtonProps> = ({
                             backgroundColor: theme.palette.background.paper,
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
-                            transitionProperty: 'background, color',
-                            transitionDuration: '0.5s',
-                            transitionTimingFunction: 'linear',
+                            transition: theme.customTransitions.onThemeChange,
                             '&:hover': {
                                 borderWidth: 2,
                             },

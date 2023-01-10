@@ -45,7 +45,7 @@ const SliderInput: React.FC<IInputFieldProps> = ({
             sx={(theme: Theme) => {
                 return {
                     width: '100%',
-                    marginTop: '30px',
+                    marginTop: theme.shape.marginTop,
                     position: 'relative',
                     border: `1px solid ${theme.palette.primary.main}`,
                     borderRadius: '5px',
@@ -66,9 +66,7 @@ const SliderInput: React.FC<IInputFieldProps> = ({
                         marginLeft: '9px',
                         paddingX: '5px',
                         backgroundColor: theme.palette.background.default,
-                        transitionProperty: 'background, color',
-                        transitionDuration: '0.5s',
-                        transitionTimingFunction: 'linear',
+                        transition: theme.customTransitions.onThemeChange,
                     }
                 }}
             >

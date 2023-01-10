@@ -5,7 +5,7 @@ import { ThemeContext } from 'contexts/ThemeContext/ThemeContext'
 import { ThemeMode } from 'contexts/ThemeContext/ThemeContextTypes'
 import { styled } from '@mui/system'
 
-const SettingsMenu: React.FC = () => {
+const AppSettingsMenu: React.FC = () => {
     const { mode, toggleThemeMode } = useContext(ThemeContext)
 
     const handleThemeChange = () => {
@@ -83,4 +83,4 @@ const SettingsMenu: React.FC = () => {
     )
 }
 
-export default SettingsMenu
+export default AppSettingsMenu

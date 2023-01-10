@@ -18,7 +18,14 @@ const SelectMenu: React.FC<ISelectMenuProps> = ({ label, value, setValue, itemLi
     }
 
     return (
-        <FormControl fullWidth sx={{ mt: '30px' }}>
+        <FormControl
+            fullWidth
+            sx={(theme: Theme) => {
+                return {
+                    mt: theme.shape.marginTop,
+                }
+            }}
+        >
             <InputLabel id='math-operation-select'>{label}</InputLabel>
             <Select
                 labelId='math-operation-select'
@@ -26,27 +33,23 @@ const SelectMenu: React.FC<ISelectMenuProps> = ({ label, value, setValue, itemLi
                 value={value}
                 onChange={handleChange}
                 inputProps={{
-                    sx: { fontSize: '26px', paddingTop: '28px' },
+                    sx: {
+                        fontSize: '26px',
+                        paddingTop: '28px',
+                    },
                 }}
                 sx={(theme: Theme) => {
                     return {
                         height: '60px',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        alignContent: 'center',
+                        transition: theme.customTransitions.onThemeChange,
                         '& label.Mui-focused': {
                             color: theme.palette.primary.main,
                         },
                         '& .MuiOutlinedInput-notchedOutline': {
                             borderColor: theme.palette.primary.main,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            alignContent: 'center',
                         },
-                        '& .MuiSelect-outlined': {
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            alignContent: 'center',
+                        '& .MuiSvgIcon-root, .MuiFormLabel-root': {
+                            transition: theme.customTransitions.onThemeChange,
                         },
                     }
                 }}

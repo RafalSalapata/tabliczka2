@@ -7,15 +7,23 @@ import { IThemeContext, ThemeMode, IThemeContextProvider } from './ThemeContextT
 declare module '@mui/material/styles' {
     interface Theme {
         gradiend: string
-        status: {
-            danger: string
+        shape: {
+            borderRadius: number
+            marginTop: object
+        }
+        customTransitions: {
+            onThemeChange: string
         }
     }
     // allow configuration using `createTheme`
     interface ThemeOptions {
         gradiend?: string
-        status?: {
-            danger?: string
+        shape?: {
+            borderRadius?: number
+            marginTop?: object
+        }
+        customTransitions?: {
+            onThemeChange?: string
         }
     }
 }
@@ -48,7 +56,7 @@ export const ThemeContextProvider = ({ children }: IThemeContextProvider) => {
             breakpoints: {
                 values: {
                     xs: 0,
-                    sm: 360,
+                    sm: 370,
                     md: 600,
                     lg: 900,
                     xl: 1200,
@@ -72,15 +80,16 @@ export const ThemeContextProvider = ({ children }: IThemeContextProvider) => {
             typography: {
                 fontFamily: 'Quicksand',
             },
+            customTransitions: {
+                onThemeChange: 'background 500ms linear, color 500ms linear',
+            },
             shape: {
                 borderRadius: 5,
+                marginTop: { xs: '25px', sm: '30px' },
             },
             gradiend: isModeLight
                 ? 'radial-gradient( circle farthest-corner at 7.2% 99.6%,  rgba(37,249,245,1) 0%, rgba(8,70,218,1) 90% );' // 'linear-gradient(135deg, rgba(3,0,255,1) 0%, rgba(0,125,255,1) 50%, rgba(0,215,255,1) 100%)'
                 : 'radial-gradient( circle farthest-corner at 10% 20%,  rgba(37,145,251,0.98) 0.1%, rgba(0,7,128,1) 99.8% );', // : 'linear-gradient(135deg, rgba(4,0,60,1) 0%, rgba(4,2,156,1) 50%, rgba(0,125,255,1) 100%)',
-            status: {
-                danger: '#876586',
-            },
         })
     }, [mode])
 

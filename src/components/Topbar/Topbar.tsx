@@ -1,5 +1,5 @@
 import { AppBar, Theme, Toolbar } from '@mui/material'
-import SettingsMenu from './components/SettingsMenu'
+import AppSettingsMenu from './components/AppSettingsMenu'
 import NavbarLogo from './components/TopbarLogo'
 
 const Topbar: React.FC = () => {
@@ -12,7 +12,7 @@ const Topbar: React.FC = () => {
                     background: theme.palette.background.default,
                     width: '100%',
                     boxShadow: theme.shadows[0],
-                    transition: 'background 0.5s linear',
+                    transition: theme.customTransitions.onThemeChange,
                 }
             }}
         >
@@ -35,7 +35,7 @@ const Topbar: React.FC = () => {
                 }}
             >
                 <NavbarLogo />
-                <SettingsMenu />
+                <AppSettingsMenu />
             </Toolbar>
         </AppBar>
     )

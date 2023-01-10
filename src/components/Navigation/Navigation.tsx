@@ -1,4 +1,4 @@
-import { Breadcrumbs, Typography } from '@mui/material'
+import { Breadcrumbs, Theme, Typography } from '@mui/material'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import { styled } from '@mui/system'
@@ -43,18 +43,15 @@ const Navigation: React.FC = () => {
         <Breadcrumbs
             separator={<NavigateNextIcon fontSize='small' color='action' />}
             aria-label='breadcrumb'
-            sx={{
-                my: 0.5,
-                alignSelf: 'flex-start',
-                transitionProperty: 'color',
-                transitionDuration: '0.5s',
-                transitionTimingFunction: 'linear',
-                '& .MuiBreadcrumbs-separator': { mx: { xs: '0', sm: '4px' } },
-                '& .MuiSvgIcon-root': {
-                    transitionProperty: 'color',
-                    transitionDuration: '0.5s',
-                    transitionTimingFunction: 'linear',
-                },
+            sx={(theme: Theme) => {
+                return {
+                    my: 0.5,
+                    alignSelf: 'flex-start',
+                    '& .MuiBreadcrumbs-separator': { mx: { xs: '0', sm: '4px' } },
+                    '& .MuiSvgIcon-root': {
+                        transition: theme.customTransitions.onThemeChange,
+                    },
+                }
             }}
         >
             <BreadcrumbLinkStyled color='inherit' to='/'>
@@ -68,9 +65,12 @@ const Navigation: React.FC = () => {
                     <Typography
                         color='text.primary'
                         key={to}
-                        sx={{
-                            fontSize: { xs: 13, sm: 14, md: 15 },
-                            fontWeight: 600,
+                        sx={(theme: Theme) => {
+                            return {
+                                fontSize: { xs: 13, sm: 14, md: 15 },
+                                fontWeight: 600,
+                                transition: theme.customTransitions.onThemeChange,
+                            }
                         }}
                     >
                         {breadcrumbNameMap[to]}

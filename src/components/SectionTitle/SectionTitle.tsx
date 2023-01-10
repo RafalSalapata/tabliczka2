@@ -15,9 +15,7 @@ const SectionTitle: React.FC<ISectionTitleProps> = ({ title }: ISectionTitleProp
                     textAlign: 'center',
                     fontWeight: 700,
                     color: theme.palette.primary.main,
-                    transitionProperty: 'background, color',
-                    transitionDuration: '0.5s',
-                    transitionTimingFunction: 'linear',
+                    transition: theme.customTransitions.onThemeChange,
                 }
             }}
         >
