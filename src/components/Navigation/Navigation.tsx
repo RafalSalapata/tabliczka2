@@ -6,6 +6,9 @@ import { styled } from '@mui/system'
 const breadcrumbNameMap: { [key: string]: string } = {
     '/matematyka': 'Matematyka',
     '/matematyka/dodawanie': 'Dodawanie',
+    '/matematyka/odejmowanie': 'Odejmowanie',
+    '/matematyka/mnozenie': 'Mnożenie',
+    '/matematyka/dzielenie': 'Dzielenie',
     '/angielski': 'Angielski',
     '/angielski/kolory': 'Kolory',
 }

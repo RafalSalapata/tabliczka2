@@ -13,7 +13,7 @@ const Home: React.FC = () => {
                 alignItems: 'center',
             }}
         >
-            <SectionTitle title='Wybierz lekcję' />
+            <SectionTitle title='Lekcja' />
             <MainButton
                 title='Matematyka'
                 navigateTo='matematyka'

@@ -9,11 +9,15 @@ import { MathRangeType } from 'contexts/MathContext/MathContextTypes'
 import React, { useContext, useState } from 'react'
 import { SelectItem } from 'components/SelectMenu/SelectMenu'
 
-const mathOperations: SelectItem[] = [
-    { itemValue: 'addition', itemText: 'Dodawanie' },
-    { itemValue: 'subtraction', itemText: 'Odejmowanie' },
-    { itemValue: 'multiplication', itemText: 'Mnożenie' },
-    { itemValue: 'division', itemText: 'Dzielenie' },
+interface SelectItemWithPath extends SelectItem {
+    path: string
+}
+
+const mathOperations: SelectItemWithPath[] = [
+    { itemValue: 'addition', itemText: 'Dodawanie', path: 'dodawanie' },
+    { itemValue: 'subtraction', itemText: 'Odejmowanie', path: 'odejmowanie' },
+    { itemValue: 'multiplication', itemText: 'Mnożenie', path: 'mnozenie' },
+    { itemValue: 'division', itemText: 'Dzielenie', path: 'dzielenie' },
 ]
 
 const mathNumberOfQuestionsScale = (value: number): number => {
@@ -35,6 +39,10 @@ const MathSettings: React.FC = () => {
     const [numberOfQuestions, setNumberOfQuestions] = useState<SliderValueType>(
         mathState.numberOfQuestions
     )
+
+    const operationToPath = (operation: string): string => {
+        return mathOperations.find((item) => item.itemValue === mathOperation)?.path ?? ''
+    }
 
     const handleStartBtnClick = (): void => {
         window.localStorage.setItem('userName', userName)
@@ -67,7 +75,7 @@ const MathSettings: React.FC = () => {
                 value={mathOperation}
                 label='Działanie'
                 setValue={setMathOperation}
-                itemList={mathOperations}
+                itemList={mathOperations as SelectItem[]}
             />
             <SliderInput
                 label='Zakres'
@@ -77,7 +85,11 @@ const MathSettings: React.FC = () => {
                 maxValue={120}
                 minDistance={5}
             />
-            <MainButton title='Start' navigateTo='dodawanie' handleClick={handleStartBtnClick} />
+            <MainButton
+                title='Start'
+                navigateTo={operationToPath(mathOperation)}
+                handleClick={handleStartBtnClick}
+            />
         </>
     )
 }
