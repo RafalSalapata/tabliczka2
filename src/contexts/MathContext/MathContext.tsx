@@ -3,17 +3,17 @@ import { MathContextType, MathReducerAction, MathStateType } from './MathContext
 
 const initMathState: MathStateType = {
     userName: '',
-    numberOfQuestions: 1,
-    mathOperation: 'addition',
-    mathRange: [1, 100],
+    testLength: 10,
+    mathOperation: { itemValue: 'addition', itemText: 'Dodawanie', path: 'dodawanie' },
+    mathRange: [9, 59],
 }
 
 const mathReducer = (state: MathStateType, action: MathReducerAction): MathStateType => {
     switch (action.type) {
         case 'setUserName':
             return { ...state, userName: action.value }
-        case 'setNumberOfQuestion':
-            return { ...state, numberOfQuestions: action.value }
+        case 'setTestLength':
+            return { ...state, testLength: action.value }
         case 'setMathOperation':
             return { ...state, mathOperation: action.value }
         case 'setMathRange':
@@ -31,8 +31,11 @@ export const MathContextProvider = ({ children }: { children: ReactNode }) => {
         return {
             ...initMathState,
             userName: localStorage.getItem('userName') ?? '',
-            numberOfQuestions: Number(localStorage.getItem('numberOfQuestions') ?? 10),
-            mathOperation: localStorage.getItem('mathOperation') ?? 'addition',
+            testLength: Number(localStorage.getItem('testLength') ?? 10),
+            mathOperation: JSON.parse(
+                localStorage.getItem('mathOperation') ??
+                    '{"itemValue":"addition","itemText":"Dodawanie","path":"dodawanie"}'
+            ),
             mathRange: JSON.parse(localStorage.getItem('mathRange') ?? '[9, 59]'),
         }
     })

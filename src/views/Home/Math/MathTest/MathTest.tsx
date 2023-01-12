@@ -7,9 +7,9 @@ const MathTest: React.FC = () => {
 
     return (
         <>
-            <SectionTitle title={mathState.mathOperation} />
+            <SectionTitle title={mathState.mathOperation.itemText} />
             <p>{mathState.mathRange.toString()}</p>
-            <p>{mathState.numberOfQuestions}</p>
+            <p>{mathState.testLength}</p>
             <p>{mathState.userName}</p>
         </>
     )

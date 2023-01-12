@@ -7,55 +7,40 @@ import { SliderValueType } from 'components/SliderInput/SliderInput'
 import MathContext from 'contexts/MathContext/MathContext'
 import { MathRangeType } from 'contexts/MathContext/MathContextTypes'
 import React, { useContext, useState } from 'react'
-import { SelectItem } from 'components/SelectMenu/SelectMenu'
-
-interface SelectItemWithPath extends SelectItem {
-    path: string
-}
-
-const mathOperations: SelectItemWithPath[] = [
-    { itemValue: 'addition', itemText: 'Dodawanie', path: 'dodawanie' },
-    { itemValue: 'subtraction', itemText: 'Odejmowanie', path: 'odejmowanie' },
-    { itemValue: 'multiplication', itemText: 'Mnożenie', path: 'mnozenie' },
-    { itemValue: 'division', itemText: 'Dzielenie', path: 'dzielenie' },
-]
-
-const mathNumberOfQuestionsScale = (value: number): number => {
-    if (value <= 10) {
-        return value
-    } else if (value <= 15) {
-        return 2 * (value - 10) + 10
-    } else {
-        return 5 * (value - 15) + 15
-    }
-}
+import { BasicOperation, mathOperations, sliderValueToTestLength } from '../mathOperationsUtils'
 
 const MathSettings: React.FC = () => {
     const { mathState, mathDispatch } = useContext(MathContext)
 
     const [userName, setUserName] = useState<string>(mathState.userName)
-    const [mathOperation, setMathOperation] = useState<string>(mathState.mathOperation)
+    const [mathOperation, setMathOperation] = useState<BasicOperation>(mathState.mathOperation)
     const [mathRange, setMathRange] = useState<SliderValueType>(mathState.mathRange)
-    const [numberOfQuestions, setNumberOfQuestions] = useState<SliderValueType>(
-        mathState.numberOfQuestions
+    const [testLengthSliderValue, setTestLengthSliderValue] = useState<SliderValueType>(
+        Number(localStorage.getItem('testLengthSliderValue') ?? 10)
     )
 
-    const operationToPath = (operation: string): string => {
-        return mathOperations.find((item) => item.itemValue === mathOperation)?.path ?? ''
+    const setMathOperationSelect = (value: string): void => {
+        const operation = mathOperations.find((item) => item.itemValue === value)
+
+        if (operation) {
+            setMathOperation(operation)
+        } else {
+            throw new Error("invalid BasicOperation was inserted in 'Działanie' select input")
+        }
     }
 
     const handleStartBtnClick = (): void => {
         window.localStorage.setItem('userName', userName)
-        window.localStorage.setItem('mathOperation', mathOperation)
+        window.localStorage.setItem('mathOperation', JSON.stringify(mathOperation))
         window.localStorage.setItem('mathRange', JSON.stringify(mathRange))
-        window.localStorage.setItem('numberOfQuestions', numberOfQuestions.toString())
+        window.localStorage.setItem('testLengthSliderValue', testLengthSliderValue.toString())
 
         mathDispatch({ type: 'setUserName', value: userName })
         mathDispatch({ type: 'setMathOperation', value: mathOperation })
         mathDispatch({ type: 'setMathRange', value: mathRange as MathRangeType })
         mathDispatch({
-            type: 'setNumberOfQuestion',
-            value: mathNumberOfQuestionsScale(numberOfQuestions as number),
+            type: 'setTestLength',
+            value: sliderValueToTestLength(testLengthSliderValue as number),
         })
     }
 
@@ -65,17 +50,17 @@ const MathSettings: React.FC = () => {
             <InputField value={userName} label='Twoje imię' setValue={setUserName} />
             <SliderInput
                 label='Liczba pytań'
-                value={numberOfQuestions}
-                setValue={setNumberOfQuestions}
+                value={testLengthSliderValue}
+                setValue={setTestLengthSliderValue}
                 minValue={2}
-                maxValue={18}
-                scale={mathNumberOfQuestionsScale}
+                maxValue={17}
+                scale={sliderValueToTestLength}
             />
             <SelectMenu
-                value={mathOperation}
+                value={mathOperation.itemValue}
                 label='Działanie'
-                setValue={setMathOperation}
-                itemList={mathOperations as SelectItem[]}
+                setValue={setMathOperationSelect}
+                itemList={mathOperations}
             />
             <SliderInput
                 label='Zakres'
@@ -87,7 +72,7 @@ const MathSettings: React.FC = () => {
             />
             <MainButton
                 title='Start'
-                navigateTo={operationToPath(mathOperation)}
+                navigateTo={mathOperation.path}
                 handleClick={handleStartBtnClick}
             />
         </>

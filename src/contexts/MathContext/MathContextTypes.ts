@@ -1,9 +1,11 @@
+import { BasicOperation } from 'views/Home/Math/mathOperationsUtils'
+
 export type MathRangeType = [number, number]
 
 export type MathStateType = {
     userName: string
-    numberOfQuestions: number
-    mathOperation: string
+    testLength: number
+    mathOperation: BasicOperation
     mathRange: MathRangeType
 }
 
@@ -14,6 +16,6 @@ export type MathContextType = {
 
 export type MathReducerAction =
     | { type: 'setUserName'; value: string }
-    | { type: 'setNumberOfQuestion'; value: number }
-    | { type: 'setMathOperation'; value: string }
+    | { type: 'setTestLength'; value: number }
+    | { type: 'setMathOperation'; value: BasicOperation }
     | { type: 'setMathRange'; value: MathRangeType }

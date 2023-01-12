@@ -8,7 +8,7 @@ export type SelectItem = {
 export interface ISelectMenuProps {
     value: string
     label: string
-    setValue: React.Dispatch<React.SetStateAction<string>>
+    setValue: (value: string) => void
     itemList: SelectItem[]
 }
 
