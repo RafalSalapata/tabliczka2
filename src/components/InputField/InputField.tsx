@@ -1,54 +1,77 @@
-import { TextField, Theme } from '@mui/material'
+import { FormHelperText, TextField, Theme } from '@mui/material'
 import { ChangeEvent } from 'react'
 
-interface IInputFieldProps {
+interface InputFieldProps {
     value: string
     label: string
     setValue: React.Dispatch<React.SetStateAction<string>>
+    error?: boolean
+    helperText?: string
 }
 
-const InputField: React.FC<IInputFieldProps> = ({ value, label, setValue }) => {
+const InputField: React.FC<InputFieldProps> = ({ value, label, setValue, error, helperText }) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value)
     }
 
     return (
-        <TextField
-            type='text'
-            variant='outlined'
-            label={label}
-            value={value}
-            fullWidth
-            onChange={handleChange}
-            inputProps={{
-                sx: {
-                    fontSize: '26px',
-                    height: '60px',
-                    paddingY: '0px',
-                    transition: (theme: Theme) => theme.customTransitions.onThemeChange,
-                },
-            }}
-            sx={(theme: Theme) => {
-                return {
-                    mt: theme.shape.marginTop,
-                    lineHeight: '0px',
-                    '& label.Mui-focused': {
-                        color: theme.palette.primary.main,
+        <>
+            <TextField
+                error={error ?? false}
+                type='text'
+                variant='outlined'
+                label={label}
+                value={value}
+                fullWidth
+                onChange={handleChange}
+                inputProps={{
+                    sx: {
+                        fontSize: '26px',
+                        height: '60px',
+                        paddingY: '0px',
+                        transition: (theme: Theme) => theme.customTransitions.onThemeChange,
                     },
-                    '& .MuiOutlinedInput-root': {
-                        '& fieldset': {
-                            borderColor: theme.palette.primary.main,
+                }}
+                sx={(theme: Theme) => {
+                    return {
+                        mt: theme.shape.marginTop,
+                        lineHeight: '0px',
+                        '& label.Mui-focused': {
+                            color: error ? theme.palette.error.main : theme.palette.primary.main,
                         },
-                        // '&:hover fieldset': {
-                        //     borderColor: 'yellow',
-                        // },
-                        // '&.Mui-focused fieldset': {
-                        //     borderColor: 'green',
-                        // },
-                    },
-                }
-            }}
-        />
+                        '& .MuiOutlinedInput-root': {
+                            '& fieldset': {
+                                borderColor: theme.palette.primary.main,
+                            },
+                            '&:hover fieldset': {
+                                borderColor: theme.palette.primary.main,
+                            },
+                            '&.Mui-focused fieldset': {
+                                borderColor: error ? theme.palette.error.main : '',
+                            },
+                        },
+                        'MuiFormHelperText-root': {
+                            margin: 0,
+                            color: 'blue',
+                            position: 'relative',
+                            top: 0,
+                        },
+                    }
+                }}
+            />
+            <FormHelperText
+                sx={(theme: Theme) => {
+                    return {
+                        margin: 0,
+                        height: '0px',
+                        color: theme.palette.error.main,
+                        fontSize: { xs: '11px', sm: '12px' },
+                    }
+                }}
+            >
+                {helperText ?? ''}
+            </FormHelperText>
+        </>
     )
 }
 

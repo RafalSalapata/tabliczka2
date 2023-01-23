@@ -13,6 +13,7 @@ const SectionTitle: React.FC<ISectionTitleProps> = ({ title }: ISectionTitleProp
                     mt: 0.5,
                     padding: '5px',
                     textAlign: 'center',
+                    fontSize: { xs: '30px', sm: '34px' },
                     fontWeight: 700,
                     color: theme.palette.primary.main,
                     transition: theme.customTransitions.onThemeChange,

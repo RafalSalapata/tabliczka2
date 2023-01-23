@@ -27,13 +27,17 @@ const SliderInput: React.FC<IInputFieldProps> = ({
             return
         }
 
+        const min = minValue ?? 2
+        const max = maxValue ?? 100
+        const minDist = minDistance ?? 2
+
         if (newValue[1] - newValue[0] < (minDistance ?? 2)) {
             if (activeThumb === 0) {
-                const clamped = Math.min(newValue[0], (maxValue ?? 100) - (minDistance ?? 2))
-                setValue([clamped, clamped + (minDistance ?? 2)])
+                const clamped = Math.min(newValue[0], max - minDist)
+                setValue([clamped, clamped + minDist])
             } else {
-                const clamped = Math.max(newValue[1], minDistance ?? 2)
-                setValue([clamped - (minDistance ?? 2), clamped])
+                const clamped = Math.max(newValue[1], min + minDist)
+                setValue([clamped - minDist, clamped])
             }
         } else {
             setValue(newValue as [number, number])
@@ -75,7 +79,7 @@ const SliderInput: React.FC<IInputFieldProps> = ({
             <Slider
                 valueLabelDisplay='on'
                 max={maxValue ?? 100}
-                min={minValue ?? 1}
+                min={minValue ?? 2}
                 // getAriaLabel={() => 'Minimum distance shift'}
                 value={value}
                 onChange={handleChange}

@@ -9,7 +9,7 @@ import {
 import RootLayout from './views/RootLayout'
 
 import Home from 'views/Home'
-import MathSettings from 'views/Home/Math/MathSettings'
+import MathSetup from 'views/Home/Math/MathSetup'
 import MathTest from 'views/Home/Math/MathTest'
 import MathLayout from 'views/Home/Math/MathLayout'
 import EnglishLayout from 'views/Home/English/EnglishLayout'
@@ -21,7 +21,7 @@ const router = createBrowserRouter(
         <Route path='/' element={<RootLayout />}>
             <Route index element={<Home />} />
             <Route path='matematyka' element={<MathLayout />}>
-                <Route index element={<MathSettings />} />
+                <Route index element={<MathSetup />} />
                 <Route path='dodawanie' element={<MathTest />} />
                 <Route path='odejmowanie' element={<MathTest />} />
                 <Route path='mnozenie' element={<MathTest />} />

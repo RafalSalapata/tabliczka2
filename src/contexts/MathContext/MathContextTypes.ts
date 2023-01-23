@@ -1,12 +1,20 @@
 import { BasicOperation } from 'views/Home/Math/mathOperationsUtils'
 
 export type MathRangeType = [number, number]
+export type MathAnswer = {
+    id: number
+    factors: [number, number]
+    correctAnswer: number
+    answer: number
+    isCorrect: boolean
+}
 
 export type MathStateType = {
     userName: string
     testLength: number
     mathOperation: BasicOperation
     mathRange: MathRangeType
+    answerList: MathAnswer[]
 }
 
 export type MathContextType = {
@@ -19,3 +27,5 @@ export type MathReducerAction =
     | { type: 'setTestLength'; value: number }
     | { type: 'setMathOperation'; value: BasicOperation }
     | { type: 'setMathRange'; value: MathRangeType }
+    | { type: 'addAnswer'; value: MathAnswer }
+    | { type: 'clearAnswerList' }
