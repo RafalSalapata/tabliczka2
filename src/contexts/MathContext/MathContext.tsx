@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useReducer } from 'react'
 import { MathContextType, MathReducerAction, MathStateType } from './MathContextTypes'
-import { isBasicOperation } from 'views/Home/Math/mathOperationsUtils'
 import { localStorageKeys } from 'utils/constants'
+import { isBasicOperation } from 'types/mathTypes'
 
 const initMathState: MathStateType = {
     userName: '',

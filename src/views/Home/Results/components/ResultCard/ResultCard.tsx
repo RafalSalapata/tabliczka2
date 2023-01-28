@@ -1,5 +1,6 @@
 import {
     Avatar,
+    Box,
     Card,
     CardActions,
     CardContent,
@@ -20,7 +21,7 @@ import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { RecordTypeWithId } from 'firebase-config'
-import { createdAtToString, durationToString, rangeToString, ratingValue } from '../../resultsUtils'
+import { createdAtToString, durationToString, rangeToString, ratingValue } from 'utils/resultsUtils'
 import { useState } from 'react'
 import AnswersList from 'components/AnswersList'
 
@@ -126,18 +127,14 @@ const ResultCard: React.FC<ResultCardProps> = ({ record }) => {
                 }
             />
             <CardContent sx={{ paddingX: 2, paddingY: 0 }}>
-                <Typography
-                    variant='body1'
-                    color='text.primary'
-                    sx={{ fontSize: { xs: '17px', sm: '19px' } }}
-                >
+                <Box sx={{ color: 'text.primary', fontSize: { xs: '17px', sm: '19px' } }}>
                     <b>{record.testType.itemText}</b> {rangeToString(record.testRange)},{' '}
                     <Typography
                         sx={{ display: 'inline-block', fontSize: { xs: '16px', sm: '18px' } }}
                     >
                         {durationToString(record.testDuration)}
                     </Typography>
-                </Typography>
+                </Box>
             </CardContent>
             <CardActions disableSpacing sx={{ paddingX: 2 }}>
                 <StyledRating

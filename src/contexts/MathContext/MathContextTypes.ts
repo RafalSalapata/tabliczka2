@@ -1,4 +1,4 @@
-import { BasicOperation } from 'views/Home/Math/mathOperationsUtils'
+import { BasicOperation } from 'types/mathTypes'
 
 export type MathRangeType = [number, number]
 export type MathAnswer = {

@@ -13,7 +13,7 @@ import MathSetup from 'views/Home/Math/MathSetup'
 import MathTest from 'views/Home/Math/MathTest'
 import MathLayout from 'views/Home/Math/MathLayout'
 import EnglishLayout from 'views/Home/English/EnglishLayout'
-import EnglishSettings from 'views/Home/English/EnglishSettings'
+import EnglishSetup from 'views/Home/English/EnglishSetup'
 import EnglishTest from 'views/Home/English/EnglishTest'
 import Results from 'views/Home/Results'
 
@@ -29,7 +29,7 @@ const router = createBrowserRouter(
                 <Route path='dzielenie' element={<MathTest />} />
             </Route>
             <Route path='angielski' element={<EnglishLayout />}>
-                <Route index element={<EnglishSettings />} />
+                <Route index element={<EnglishSetup />} />
                 <Route path='kolory' element={<EnglishTest />} />
             </Route>
             <Route path='wyniki' element={<Results />} />

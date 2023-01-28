@@ -8,7 +8,8 @@ import MathContext from 'contexts/MathContext/MathContext'
 import { MathRangeType } from 'contexts/MathContext/MathContextTypes'
 import React, { useContext, useEffect, useState } from 'react'
 import { localStorageKeys } from 'utils/constants'
-import { BasicOperation, mathOperations, sliderValueToTestLength } from '../mathOperationsUtils'
+import { BasicOperation, mathOperations } from 'types/mathTypes'
+import { sliderValueToTestLength } from 'utils/mathUtils'
 
 const MathSetup: React.FC = () => {
     const { mathState, mathDispatch } = useContext(MathContext)

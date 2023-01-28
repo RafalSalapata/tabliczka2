@@ -5,7 +5,7 @@ import Summary from 'components/Summary'
 import MathContext from 'contexts/MathContext/MathContext'
 import { MathAnswer } from 'contexts/MathContext/MathContextTypes'
 import { ChangeEvent, KeyboardEvent, useContext, useEffect, useRef, useState } from 'react'
-import { getCorrectAnswer, getFactors } from '../mathOperationsUtils'
+import { getCorrectAnswer, getFactors } from 'utils/mathUtils'
 
 const MathTest: React.FC = () => {
     const { mathState, mathDispatch } = useContext(MathContext)

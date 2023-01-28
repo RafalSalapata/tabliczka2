@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import SectionTitle from 'components/SectionTitle'
-import { getRecords } from './resultsUtils'
+import { getRecords } from 'utils/resultsUtils'
 import { RecordTypeWithId } from 'firebase-config'
 import ResultCard from './components/ResultCard'
 import { Typography } from '@mui/material'

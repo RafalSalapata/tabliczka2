@@ -1,7 +1,7 @@
 import SectionTitle from 'components/SectionTitle'
 import { Link } from 'react-router-dom'
 
-const EnglishSettings: React.FC = () => {
+const EnglishSetup: React.FC = () => {
     return (
         <>
             <SectionTitle title='Ustawienia' />
@@ -10,4 +10,4 @@ const EnglishSettings: React.FC = () => {
     )
 }
 
-export default EnglishSettings
+export default EnglishSetup
