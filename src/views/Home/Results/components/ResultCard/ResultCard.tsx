@@ -131,7 +131,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ record }) => {
                     color='text.primary'
                     sx={{ fontSize: { xs: '17px', sm: '19px' } }}
                 >
-                    <b>{record.testType.itemText}</b> {rangeToString([2, 18])},{' '}
+                    <b>{record.testType.itemText}</b> {rangeToString(record.testRange)},{' '}
                     <Typography
                         sx={{ display: 'inline-block', fontSize: { xs: '16px', sm: '18px' } }}
                     >

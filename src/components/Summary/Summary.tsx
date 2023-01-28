@@ -33,6 +33,7 @@ const Summary: React.FC<SummaryProps> = ({ onRestartTestClick }) => {
             testDuration: duration,
             testLength: mathState.testLength,
             testType: mathState.mathOperation,
+            testRange: mathState.mathRange,
             userName: mathState.userName,
         }
 
@@ -41,6 +42,7 @@ const Summary: React.FC<SummaryProps> = ({ onRestartTestClick }) => {
         correctAnswerNo,
         mathState.answerList,
         mathState.mathOperation,
+        mathState.mathRange,
         mathState.testLength,
         mathState.testStartTime,
         mathState.userName,

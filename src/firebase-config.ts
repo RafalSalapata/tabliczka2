@@ -24,6 +24,7 @@ export type RecordType = {
     testDuration: number
     testLength: number
     testType: BasicOperation
+    testRange: [number, number]
     userName: string
 }
 
