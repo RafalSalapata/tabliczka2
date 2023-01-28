@@ -9,6 +9,7 @@ const initMathState: MathStateType = {
     mathOperation: { itemValue: 'addition', itemText: 'Dodawanie', path: 'dodawanie', sign: '+' },
     mathRange: [9, 59],
     answerList: [],
+    testStartTime: 0,
 }
 
 const mathReducer = (state: MathStateType, action: MathReducerAction): MathStateType => {
@@ -25,6 +26,8 @@ const mathReducer = (state: MathStateType, action: MathReducerAction): MathState
             return { ...state, answerList: [...state.answerList, action.value] }
         case 'clearAnswerList':
             return { ...state, answerList: [] }
+        case 'setStartTime':
+            return { ...state, testStartTime: Date.now() }
     }
 }
 

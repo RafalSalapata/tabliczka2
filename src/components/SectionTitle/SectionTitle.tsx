@@ -10,8 +10,7 @@ const SectionTitle: React.FC<ISectionTitleProps> = ({ title }: ISectionTitleProp
             variant='h4'
             sx={(theme: Theme) => {
                 return {
-                    mt: 0.5,
-                    padding: '5px',
+                    mt: 1,
                     textAlign: 'center',
                     fontSize: { xs: '30px', sm: '34px' },
                     fontWeight: 700,

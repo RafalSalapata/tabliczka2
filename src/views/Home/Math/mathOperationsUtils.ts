@@ -137,7 +137,7 @@ export const getCorrectAnswer = (factors: [number, number], operation: BasicOper
 
 export const getEndMessage = (correctNo: number, testLength: number): string => {
     const ratio = correctNo / testLength
-    let endMessage = ''
+    let endMessage: string
 
     switch (true) {
         case ratio > 0.9:

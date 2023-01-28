@@ -21,8 +21,9 @@ const Home: React.FC = () => {
                 justifyContent={JustifyContentEnum.left}
             />
             <MainButton
-                title='Angielski'
-                navigateTo='angielski'
+                title='Angielski (wkrótce)'
+                navigateTo=''
+                disabled={true}
                 imageSrc='assets/english-button.png'
                 justifyContent={JustifyContentEnum.left}
             />

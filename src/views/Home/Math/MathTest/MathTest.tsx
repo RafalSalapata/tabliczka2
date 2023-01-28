@@ -19,6 +19,7 @@ const MathTest: React.FC = () => {
 
     useEffect(() => {
         mathDispatch({ type: 'clearAnswerList' })
+        mathDispatch({ type: 'setStartTime' })
     }, [mathDispatch])
 
     useEffect(() => {

@@ -11,6 +11,7 @@ const breadcrumbNameMap: { [key: string]: string } = {
     '/matematyka/dzielenie': 'Dzielenie',
     '/angielski': 'Angielski',
     '/angielski/kolory': 'Kolory',
+    '/wyniki': 'Wyniki',
 }
 
 const BreadcrumbLinkStyled = styled(RouterLink)(({ theme }) => {

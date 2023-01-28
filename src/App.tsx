@@ -15,6 +15,7 @@ import MathLayout from 'views/Home/Math/MathLayout'
 import EnglishLayout from 'views/Home/English/EnglishLayout'
 import EnglishSettings from 'views/Home/English/EnglishSettings'
 import EnglishTest from 'views/Home/English/EnglishTest'
+import Results from 'views/Home/Results'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
                 <Route index element={<EnglishSettings />} />
                 <Route path='kolory' element={<EnglishTest />} />
             </Route>
+            <Route path='wyniki' element={<Results />} />
         </Route>
     )
 )

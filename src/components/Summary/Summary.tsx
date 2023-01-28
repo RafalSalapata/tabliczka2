@@ -1,10 +1,16 @@
-import { useContext } from 'react'
-import MathContext from 'contexts/MathContext/MathContext'
-import SectionTitle from 'components/SectionTitle'
-import { getEndMessage } from 'views/Home/Math/mathOperationsUtils'
+import { useContext, useEffect } from 'react'
 import { Typography, Theme } from '@mui/material'
+import { addDoc, Timestamp } from 'firebase/firestore'
+import { recordsCollection, RecordType } from 'firebase-config'
+import MathContext from 'contexts/MathContext/MathContext'
+import { getEndMessage } from 'views/Home/Math/mathOperationsUtils'
+import SectionTitle from 'components/SectionTitle'
 import MainButton from 'components/MainButton'
 import AnswersList from 'components/AnswersList'
+
+const createRecord = async (record: RecordType) => {
+    await addDoc<RecordType>(recordsCollection, record)
+}
 
 interface SummaryProps {
     onRestartTestClick: () => void
@@ -16,24 +22,46 @@ const Summary: React.FC<SummaryProps> = ({ onRestartTestClick }) => {
     const correctAnswerNo = mathState.answerList.filter((answer) => answer.isCorrect).length
     const endMessage = getEndMessage(correctAnswerNo, mathState.testLength)
 
+    useEffect(() => {
+        const duration: number = Date.now() - mathState.testStartTime
+
+        const record: RecordType = {
+            answerList: mathState.answerList,
+            correctAnswerNo: correctAnswerNo,
+            createdAt: Timestamp.fromDate(new Date()),
+            testCategory: 'math',
+            testDuration: duration,
+            testLength: mathState.testLength,
+            testType: mathState.mathOperation,
+            userName: mathState.userName,
+        }
+
+        createRecord(record)
+    }, [
+        correctAnswerNo,
+        mathState.answerList,
+        mathState.mathOperation,
+        mathState.testLength,
+        mathState.testStartTime,
+        mathState.userName,
+    ])
+
     return (
         <>
             <SectionTitle title={`${mathState.userName}! Twój wynik to`} />
             <Typography
                 variant='h4'
                 fontWeight={600}
-                sx={(theme: Theme) => {
-                    return {
-                        mt: '5px',
-                        display: 'flex',
-                        flexDirection: { xs: 'column', sm: 'row' },
-                        gap: { xs: '0px', sm: '12px' },
-                        textAlign: 'center',
-                        color: theme.palette.text.primary,
-                        fontSize: { xs: '28px', sm: '32px' },
-                        transition: theme.customTransitions.onThemeChange,
-                    }
-                }}
+                sx={(theme: Theme) => ({
+                    mt: '5px',
+                    display: 'flex',
+                    flexDirection: { xs: 'column', sm: 'row' },
+                    gap: { xs: '0px', sm: '12px' },
+                    textAlign: 'center',
+                    color: theme.palette.text.primary,
+                    fontSize: { xs: '28px', sm: '32px' },
+                    transition: theme.customTransitions.onThemeChange,
+                })}
             >
                 <span>
                     {correctAnswerNo} / {mathState.testLength}
@@ -41,7 +69,10 @@ const Summary: React.FC<SummaryProps> = ({ onRestartTestClick }) => {
                 <span>{endMessage}</span>
             </Typography>
             <MainButton navigateTo='' title='Powtórz test' handleClick={onRestartTestClick} />
-            <AnswersList />
+            <AnswersList
+                answerList={mathState.answerList}
+                operationSign={mathState.mathOperation.sign}
+            />
         </>
     )
 }

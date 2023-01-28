@@ -15,6 +15,7 @@ export type MathStateType = {
     mathOperation: BasicOperation
     mathRange: MathRangeType
     answerList: MathAnswer[]
+    testStartTime: number
 }
 
 export type MathContextType = {
@@ -29,3 +30,4 @@ export type MathReducerAction =
     | { type: 'setMathRange'; value: MathRangeType }
     | { type: 'addAnswer'; value: MathAnswer }
     | { type: 'clearAnswerList' }
+    | { type: 'setStartTime' }

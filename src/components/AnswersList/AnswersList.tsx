@@ -8,8 +8,7 @@ import {
     TableRow,
     Theme,
 } from '@mui/material'
-import MathContext from 'contexts/MathContext/MathContext'
-import { useContext } from 'react'
+import { MathAnswer } from 'contexts/MathContext/MathContextTypes'
 
 const tableFontSize = (isCorrect: boolean) => {
     return {
@@ -18,33 +17,37 @@ const tableFontSize = (isCorrect: boolean) => {
     }
 }
 
-const AnswersList: React.FC = () => {
-    const { mathState } = useContext(MathContext)
+interface AnswersListProps {
+    answerList: MathAnswer[]
+    operationSign: string
+    topMarginOff?: boolean
+}
 
+const AnswersList: React.FC<AnswersListProps> = ({ answerList, operationSign, topMarginOff }) => {
     return (
         <TableContainer
             component={Paper}
-            sx={(theme: Theme) => {
-                return { mt: theme.shape.marginTop, padding: '2px 5px 5px 5px' }
-            }}
+            sx={(theme: Theme) => ({
+                mt: topMarginOff ? 0 : theme.shape.marginTop,
+                padding: '2px 5px 5px 5px',
+                boxShadow: theme.shadows[4],
+            })}
         >
             <Table size='small' aria-label='answer list'>
                 <TableHead>
                     <TableRow>
                         <TableCell align='left' colSpan={6} sx={{ fontSize: '20px' }}>
-                            Twoje odpowiedzi
+                            Odpowiedzi
                         </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {mathState.answerList.map((answer) => (
+                    {answerList.map((answer) => (
                         <TableRow
                             key={answer.id}
-                            sx={(theme: Theme) => {
-                                return {
-                                    background: answer.isCorrect ? '' : theme.palette.error.light,
-                                }
-                            }}
+                            sx={(theme: Theme) => ({
+                                background: answer.isCorrect ? '' : theme.palette.error.light,
+                            })}
                         >
                             <TableCell
                                 align='right'
@@ -60,7 +63,7 @@ const AnswersList: React.FC = () => {
                                 width='21%'
                                 sx={tableFontSize(answer.isCorrect)}
                             >
-                                {`${answer.factors[1]} ${mathState.mathOperation.sign} ${answer.factors[0]}`}
+                                {`${answer.factors[1]} ${operationSign} ${answer.factors[0]}`}
                             </TableCell>
                             <TableCell
                                 padding='none'
@@ -73,7 +76,7 @@ const AnswersList: React.FC = () => {
                             <TableCell
                                 padding='none'
                                 align='left'
-                                width='21%'
+                                width='17%'
                                 sx={tableFontSize(answer.isCorrect)}
                             >
                                 {answer.answer}
@@ -81,14 +84,14 @@ const AnswersList: React.FC = () => {
                             <TableCell
                                 padding='none'
                                 align='left'
-                                width='42%'
+                                width='46%'
                                 sx={tableFontSize(answer.isCorrect)}
                             >
                                 {answer.isCorrect ? (
                                     ''
                                 ) : (
                                     <p>
-                                        powinno być{' '}
+                                        powinno być
                                         <b style={{ marginLeft: '10px' }}>{answer.correctAnswer}</b>
                                     </p>
                                 )}

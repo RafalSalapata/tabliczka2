@@ -23,6 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # mine
+/.firebase
 /src/App.test.tsx
 /src/setupTests.ts
 /src/reportWebVitals.ts
