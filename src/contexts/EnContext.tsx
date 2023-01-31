@@ -5,7 +5,7 @@ import { EnContextType, EnReducerAction, EnStateType, enTopics, isEnTopic } from
 const initEnState: EnStateType = {
     userName: '',
     testLength: 10,
-    topic: { itemValue: 'animals', itemText: 'Zwierzęta', path: 'zwierzeta' },
+    topic: enTopics[0],
     answerList: [],
     startTime: 0,
 }

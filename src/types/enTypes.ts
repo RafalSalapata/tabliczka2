@@ -1,12 +1,20 @@
 import { SelectItem } from 'types/appTypes'
 
+export const EnTopicValue = {
+    animals: 'Animals',
+    clothes: 'Clothes',
+} as const
+
+export type EnTopicValueType = typeof EnTopicValue[keyof typeof EnTopicValue]
+
 export type EnTopic = SelectItem & {
+    itemValue: EnTopicValueType
     readonly path: string
 }
 
 export const enTopics: readonly EnTopic[] = [
-    { itemValue: 'animals', itemText: 'Zwierzęta', path: 'zwierzeta' },
-    { itemValue: 'clothes', itemText: 'Ubrania', path: 'ubrania' },
+    { itemValue: EnTopicValue.animals, itemText: 'Zwierzęta', path: 'zwierzeta' },
+    { itemValue: EnTopicValue.clothes, itemText: 'Ubrania', path: 'ubrania' },
 ] as const
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

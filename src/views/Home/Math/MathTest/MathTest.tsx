@@ -95,9 +95,7 @@ const MathTest: React.FC = () => {
                         marginTop: '45px',
                     }}
                 >
-                    Ile wynosi: {factors[1]}
-                    {mathState.mathOperation.sign}
-                    {factors[0]}?
+                    {`Ile wynosi: ${factors[1]}${mathState.mathOperation.sign}${factors[0]}?`}
                 </Typography>
                 <TextField
                     type='number'
