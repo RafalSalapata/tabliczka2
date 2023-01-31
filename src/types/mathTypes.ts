@@ -1,41 +1,46 @@
-import { SelectItem } from 'components/SelectMenu/SelectMenu'
+import { SelectItem } from './appTypes'
 
-interface Addition extends SelectItem {
-    itemValue: 'addition'
-    itemText: 'Dodawanie'
-    path: 'dodawanie'
-    sign: '+'
+export const BasicOperationValue = {
+    addition: 'Addition',
+    subtraction: 'Subtraction',
+    multiplication: 'Multiplication',
+    division: 'Division',
+} as const
+
+export type BasicOperationValueType = typeof BasicOperationValue[keyof typeof BasicOperationValue]
+
+export type BasicOperation = SelectItem & {
+    itemValue: BasicOperationValueType
+    readonly path: string
+    readonly sign: string
 }
 
-interface Subtraction extends SelectItem {
-    itemValue: 'subtraction'
-    itemText: 'Odejmowanie'
-    path: 'odejmowanie'
-    sign: '-'
-}
-
-interface Multiplication extends SelectItem {
-    itemValue: 'multiplication'
-    itemText: 'Mnożenie'
-    path: 'mnozenie'
-    sign: 'x'
-}
-
-interface Division extends SelectItem {
-    itemValue: 'division'
-    itemText: 'Dzielenie'
-    path: 'dzielenie'
-    sign: ':'
-}
-
-export type BasicOperation = Addition | Subtraction | Multiplication | Division
-
-export const mathOperations: BasicOperation[] = [
-    { itemValue: 'addition', itemText: 'Dodawanie', path: 'dodawanie', sign: '+' },
-    { itemValue: 'subtraction', itemText: 'Odejmowanie', path: 'odejmowanie', sign: '-' },
-    { itemValue: 'multiplication', itemText: 'Mnożenie', path: 'mnozenie', sign: 'x' },
-    { itemValue: 'division', itemText: 'Dzielenie', path: 'dzielenie', sign: ':' },
-]
+export const basicOperations: readonly BasicOperation[] = [
+    {
+        itemValue: BasicOperationValue.addition,
+        itemText: 'Dodawanie',
+        path: 'dodawanie',
+        sign: '+',
+    },
+    {
+        itemValue: BasicOperationValue.subtraction,
+        itemText: 'Odejmowanie',
+        path: 'odejmowanie',
+        sign: '-',
+    },
+    {
+        itemValue: BasicOperationValue.multiplication,
+        itemText: 'Mnożenie',
+        path: 'mnozenie',
+        sign: 'x',
+    },
+    {
+        itemValue: BasicOperationValue.division,
+        itemText: 'Dzielenie',
+        path: 'dzielenie',
+        sign: ':',
+    },
+] as const
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isBasicOperation = (arg: any): arg is BasicOperation => {
@@ -44,14 +49,50 @@ export const isBasicOperation = (arg: any): arg is BasicOperation => {
     const path = arg.path
     const sign = arg.sign
 
-    const isAddition =
-        text === 'Dodawanie' && value === 'addition' && path === 'dodawanie' && sign === '+'
-    const isSubtraction =
-        text === 'Odejmowanie' && value === 'subtraction' && path === 'odejmowanie' && sign === '-'
-    const isMultiplication =
-        text === 'Mnożenie' && value === 'multiplication' && path === 'mnozenie' && sign === 'x'
-    const isDivision =
-        text === 'Dzielenie' && value === 'division' && path === 'dzielenie' && sign === ':'
+    const propsCheck = (operation: BasicOperation): boolean => {
+        return (
+            operation.itemValue === value &&
+            operation.itemText === text &&
+            operation.path === path &&
+            operation.sign === sign
+        )
+    }
 
-    return isAddition || isSubtraction || isMultiplication || isDivision
+    return basicOperations.map((operation) => propsCheck(operation)).some((x) => x)
 }
+
+//////////////////////
+// MathContectTypes //
+//////////////////////
+export type MathRangeType = [number, number]
+
+export type MathAnswer = {
+    id: number
+    factors: [number, number]
+    correctAnswer: number
+    answer: number
+    isCorrect: boolean
+}
+
+export type MathStateType = {
+    userName: string
+    testLength: number
+    mathOperation: BasicOperation
+    mathRange: MathRangeType
+    answerList: MathAnswer[]
+    testStartTime: number
+}
+
+export type MathContextType = {
+    mathState: MathStateType
+    mathDispatch: React.Dispatch<MathReducerAction>
+}
+
+export type MathReducerAction =
+    | { type: 'setUserName'; value: string }
+    | { type: 'setTestLength'; value: number }
+    | { type: 'setMathOperation'; value: BasicOperation }
+    | { type: 'setMathRange'; value: MathRangeType }
+    | { type: 'addAnswer'; value: MathAnswer }
+    | { type: 'clearAnswerList' }
+    | { type: 'setStartTime' }

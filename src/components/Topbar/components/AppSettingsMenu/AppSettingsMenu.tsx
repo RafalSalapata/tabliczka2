@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import { DarkMode, LightMode } from '@mui/icons-material'
 import { Box, IconButton, FormControl, NativeSelect, InputBase, Theme } from '@mui/material'
-import { ThemeContext } from 'contexts/ThemeContext/ThemeContext'
-import { ThemeMode } from 'contexts/ThemeContext/ThemeContextTypes'
+import { ThemeContext } from 'contexts/ThemeContext'
+import { ThemeMode } from 'types/appTypes'
 import { styled } from '@mui/system'
 
 const AppSettingsMenu: React.FC = () => {

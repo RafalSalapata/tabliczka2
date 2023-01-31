@@ -4,60 +4,60 @@ import SectionTitle from 'components/SectionTitle'
 import SelectMenu from 'components/SelectMenu'
 import SliderInput from 'components/SliderInput'
 import { SliderValueType } from 'components/SliderInput/SliderInput'
-import MathContext from 'contexts/MathContext/MathContext'
-import { MathRangeType } from 'contexts/MathContext/MathContextTypes'
+import MathContext from 'contexts/MathContext'
+import { MathRangeType } from 'types/mathTypes'
 import React, { useContext, useEffect, useState } from 'react'
 import { localStorageKeys } from 'utils/constants'
-import { BasicOperation, mathOperations } from 'types/mathTypes'
-import { sliderValueToTestLength } from 'utils/mathUtils'
+import { BasicOperation, basicOperations } from 'types/mathTypes'
+import { sliderValueToTestLength } from 'utils/appUtils'
 
 const MathSetup: React.FC = () => {
     const { mathState, mathDispatch } = useContext(MathContext)
 
     const [userName, setUserName] = useState<string>(mathState.userName)
-    const [inputError, setInputError] = useState<boolean>(false)
+    const [incorrectName, setIncorrectName] = useState<boolean>(false)
     const [validateForm, setValidateForm] = useState<boolean>(false)
     const [mathOperation, setMathOperation] = useState<BasicOperation>(mathState.mathOperation)
     const [mathRange, setMathRange] = useState<SliderValueType>(mathState.mathRange)
     const [testLengthSliderValue, setTestLengthSliderValue] = useState<SliderValueType>(
-        Number(localStorage.getItem(localStorageKeys.TEST_LENGTH_SLIDER_VALUE_KEY) ?? 10)
+        Number(localStorage.getItem(localStorageKeys.math.SLIDER_VALUE_LENGTH) ?? 10)
     )
 
     useEffect(() => {
         if (userName.length < 3 || userName.length > 20) {
-            setInputError(true)
+            setIncorrectName(true)
         } else {
-            setInputError(false)
+            setIncorrectName(false)
         }
     }, [userName])
 
     const setMathOperationSelect = (value: string): void => {
-        const operation = mathOperations.find((item) => item.itemValue === value)
+        const operation = basicOperations.find((item) => item.itemValue === value)
 
         if (operation) {
             setMathOperation(operation)
         } else {
-            throw new Error("invalid BasicOperation was inserted in 'Działanie' select input")
+            throw new Error("invalid BasicOperation was selected in 'Działanie' select input")
         }
     }
 
     const handleStartBtnClick = (): void => {
-        if (inputError) {
+        if (incorrectName) {
             setValidateForm(true)
         } else {
             const testLength = sliderValueToTestLength(testLengthSliderValue as number)
 
-            window.localStorage.setItem(localStorageKeys.USER_NAME_KEY, userName)
+            window.localStorage.setItem(localStorageKeys.app.USER_NAME, userName)
             window.localStorage.setItem(
-                localStorageKeys.MATH_OPERATION_KEY,
+                localStorageKeys.math.OPERATION,
                 JSON.stringify(mathOperation)
             )
-            window.localStorage.setItem(localStorageKeys.MATH_RANGE_KEY, JSON.stringify(mathRange))
+            window.localStorage.setItem(localStorageKeys.math.RANGE, JSON.stringify(mathRange))
             window.localStorage.setItem(
-                localStorageKeys.TEST_LENGTH_SLIDER_VALUE_KEY,
+                localStorageKeys.math.SLIDER_VALUE_LENGTH,
                 testLengthSliderValue.toString()
             )
-            window.localStorage.setItem(localStorageKeys.TEST_LENGTH_KEY, testLength.toString())
+            window.localStorage.setItem(localStorageKeys.math.TEST_LENGTH, testLength.toString())
 
             mathDispatch({ type: 'setUserName', value: userName })
             mathDispatch({ type: 'setMathOperation', value: mathOperation })
@@ -73,8 +73,8 @@ const MathSetup: React.FC = () => {
                 value={userName}
                 label='Twoje imię'
                 setValue={setUserName}
-                error={validateForm && inputError}
-                helperText={validateForm && inputError ? 'Imię musi mieć od 3 do 20 znaków' : ''}
+                error={validateForm && incorrectName}
+                helperText={validateForm && incorrectName ? 'Imię musi mieć od 3 do 20 znaków' : ''}
             />
             <SliderInput
                 label='Liczba pytań'
@@ -88,7 +88,7 @@ const MathSetup: React.FC = () => {
                 value={mathOperation.itemValue}
                 label='Działanie'
                 setValue={setMathOperationSelect}
-                itemList={mathOperations}
+                itemList={basicOperations}
             />
             <SliderInput
                 label='Zakres'
@@ -100,7 +100,7 @@ const MathSetup: React.FC = () => {
             />
             <MainButton
                 title='Start'
-                navigateTo={inputError ? '' : mathOperation.path}
+                navigateTo={incorrectName ? '' : mathOperation.path}
                 handleClick={handleStartBtnClick}
             />
         </>

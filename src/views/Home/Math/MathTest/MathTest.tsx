@@ -2,9 +2,9 @@ import { Box, TextField, Typography } from '@mui/material'
 import MainButton from 'components/MainButton'
 import SectionTitle from 'components/SectionTitle'
 import Summary from 'components/Summary'
-import MathContext from 'contexts/MathContext/MathContext'
-import { MathAnswer } from 'contexts/MathContext/MathContextTypes'
+import MathContext from 'contexts/MathContext'
 import { ChangeEvent, KeyboardEvent, useContext, useEffect, useRef, useState } from 'react'
+import { MathAnswer } from 'types/mathTypes'
 import { getCorrectAnswer, getFactors } from 'utils/mathUtils'
 
 const MathTest: React.FC = () => {
@@ -33,7 +33,7 @@ const MathTest: React.FC = () => {
     }, [currentQuestion, mathState.mathOperation.itemValue, mathState.mathRange])
 
     const onNextClick = () => {
-        const correctAnswer = getCorrectAnswer(factors, mathState.mathOperation)
+        const correctAnswer = getCorrectAnswer(factors, mathState.mathOperation.itemValue)
 
         const answer: MathAnswer = {
             id: currentQuestion,

@@ -1,4 +1,4 @@
-import { MathContextProvider } from 'contexts/MathContext/MathContext'
+import { MathContextProvider } from 'contexts/MathContext'
 import { Outlet } from 'react-router-dom'
 
 const MathLayout: React.FC = () => {

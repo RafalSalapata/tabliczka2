@@ -11,8 +11,9 @@ const Results: React.FC = () => {
     useEffect(() => {
         getRecords(21)
             .then((res) => setRecords(res))
-            // eslint-disable-next-line no-console
-            .catch((err) => console.error(err.message))
+            .catch((err) => {
+                throw new Error(err.message)
+            })
     }, [])
     return (
         <>

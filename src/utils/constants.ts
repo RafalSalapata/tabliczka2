@@ -1,7 +1,16 @@
 export const localStorageKeys = {
-    USER_NAME_KEY: 'tabliczka-user-name',
-    MATH_OPERATION_KEY: 'tabliczka-math-operation',
-    MATH_RANGE_KEY: 'tabliczka-math-range',
-    TEST_LENGTH_KEY: 'tabliczka-test-length',
-    TEST_LENGTH_SLIDER_VALUE_KEY: 'tabliczka-test-length-slider-value',
+    app: {
+        USER_NAME: 'tabliczka-user-name',
+    },
+    math: {
+        OPERATION: 'tabliczka-math-operation',
+        RANGE: 'tabliczka-math-range',
+        TEST_LENGTH: 'tabliczka-math-test-length',
+        SLIDER_VALUE_LENGTH: 'tabliczka-math-slider-value-length',
+    },
+    english: {
+        TOPIC: 'tabliczka-en-topic',
+        TEST_LENGTH: 'tabliczka-en-test-length',
+        SLIDER_VALUE_LENGTH: 'tabliczka-en-slider-value-length',
+    },
 } as const

@@ -1,5 +1,5 @@
 import { Box, Slider, Theme, Typography } from '@mui/material'
-import { MathRangeType } from 'contexts/MathContext/MathContextTypes'
+import { MathRangeType } from 'types/mathTypes'
 
 export type SliderValueType = number | MathRangeType
 

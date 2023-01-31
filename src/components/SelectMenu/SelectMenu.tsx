@@ -1,15 +1,11 @@
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Theme } from '@mui/material'
-
-export type SelectItem = {
-    itemValue: string
-    itemText: string
-}
+import { SelectItem } from 'types/appTypes'
 
 export interface ISelectMenuProps {
     value: string
     label: string
     setValue: (value: string) => void
-    itemList: SelectItem[]
+    itemList: readonly SelectItem[]
 }
 
 const SelectMenu: React.FC<ISelectMenuProps> = ({ label, value, setValue, itemList }) => {

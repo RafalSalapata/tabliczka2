@@ -1,14 +1,4 @@
-import { BasicOperation } from 'types/mathTypes'
-
-export const sliderValueToTestLength = (value: number): number => {
-    if (value <= 10) {
-        return value
-    } else if (value <= 15) {
-        return 2 * (value - 10) + 10
-    } else {
-        return 5 * (value - 15) + 20
-    }
-}
+import { BasicOperationValue, BasicOperationValueType } from 'types/mathTypes'
 
 const getDivisors = (n: number): number[] => {
     return [...Array(n + 1).keys()].slice(1).filter((i) => n % i === 0)
@@ -22,12 +12,12 @@ export const getFactors = (min: number, max: number, operation: string): [number
     let b = getRandomFromTo(min, max)
     let a = getRandomFromTo(min, b)
 
-    if (operation === 'subtraction' && a === b) {
+    if (operation === BasicOperationValue.subtraction && a === b) {
         b = getRandomFromTo(min + 2, max) // min and max are set in frontend to fulfil: max - min >=5
         a = getRandomFromTo(min, b - 2)
     }
 
-    if (operation === 'division') {
+    if (operation === BasicOperationValue.division) {
         b = getRandomFromTo(min + 1, max) // min and max are set in frontend to fulfil: max - min >=5
         a = getRandomFromTo(min, b - 1)
         let divisors = getDivisors(b)
@@ -49,51 +39,32 @@ export const getFactors = (min: number, max: number, operation: string): [number
     return [a, b]
 }
 
-export const getCorrectAnswer = (factors: [number, number], operation: BasicOperation): number => {
+export const getCorrectAnswer = (
+    factors: [number, number],
+    operationValue: BasicOperationValueType
+): number => {
     let correctAnswer = 0
 
     const exhaustiveCheck = (x: never) => {
         throw new Error('check if all Basic Operations values are listed in the switch below')
     }
 
-    switch (operation.itemValue) {
-        case 'addition':
+    switch (operationValue) {
+        case BasicOperationValue.addition:
             correctAnswer = factors[1] + factors[0]
             break
-        case 'subtraction':
+        case BasicOperationValue.subtraction:
             correctAnswer = factors[1] - factors[0]
             break
-        case 'multiplication':
+        case BasicOperationValue.multiplication:
             correctAnswer = factors[1] * factors[0]
             break
-        case 'division':
+        case BasicOperationValue.division:
             correctAnswer = factors[1] / factors[0]
             break
         default:
-            exhaustiveCheck(operation)
+            exhaustiveCheck(operationValue)
     }
 
     return correctAnswer
-}
-
-export const getEndMessage = (correctNo: number, testLength: number): string => {
-    const ratio = correctNo / testLength
-    let endMessage: string
-
-    switch (true) {
-        case ratio > 0.9:
-            endMessage = 'Mistrzunio! :D'
-            break
-        case ratio > 0.75:
-            endMessage = 'Nieźle :)'
-            break
-        case ratio > 0.6:
-            endMessage = 'Nie ma tragedii'
-            break
-        default:
-            endMessage = 'Cienizna :('
-            break
-    }
-
-    return endMessage
 }

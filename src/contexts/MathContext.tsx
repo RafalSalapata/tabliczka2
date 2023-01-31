@@ -1,12 +1,12 @@
 import { createContext, ReactNode, useReducer } from 'react'
-import { MathContextType, MathReducerAction, MathStateType } from './MathContextTypes'
+import { basicOperations, MathContextType, MathReducerAction, MathStateType } from 'types/mathTypes'
 import { localStorageKeys } from 'utils/constants'
 import { isBasicOperation } from 'types/mathTypes'
 
 const initMathState: MathStateType = {
     userName: '',
     testLength: 10,
-    mathOperation: { itemValue: 'addition', itemText: 'Dodawanie', path: 'dodawanie', sign: '+' },
+    mathOperation: basicOperations[0],
     mathRange: [9, 59],
     answerList: [],
     testStartTime: 0,
@@ -38,24 +38,17 @@ const MathContext = createContext<MathContextType>({
 
 export const MathContextProvider = ({ children }: { children: ReactNode }) => {
     const [mathState, mathDispatch] = useReducer(mathReducer, initMathState, (): MathStateType => {
-        const operation = localStorage.getItem(localStorageKeys.MATH_OPERATION_KEY)
+        const operation = localStorage.getItem(localStorageKeys.math.OPERATION)
 
         return {
             ...initMathState,
-            userName: localStorage.getItem(localStorageKeys.USER_NAME_KEY) ?? '',
-            testLength: Number(localStorage.getItem(localStorageKeys.TEST_LENGTH_KEY) ?? 10),
+            userName: localStorage.getItem(localStorageKeys.app.USER_NAME) ?? '',
+            testLength: Number(localStorage.getItem(localStorageKeys.math.TEST_LENGTH) ?? 10),
             mathOperation:
                 operation && isBasicOperation(JSON.parse(operation))
                     ? JSON.parse(operation)
-                    : {
-                          itemValue: 'addition',
-                          itemText: 'Dodawanie',
-                          path: 'dodawanie',
-                          sign: '+',
-                      },
-            mathRange: JSON.parse(
-                localStorage.getItem(localStorageKeys.MATH_RANGE_KEY) ?? '[9, 59]'
-            ),
+                    : basicOperations[0],
+            mathRange: JSON.parse(localStorage.getItem(localStorageKeys.math.RANGE) ?? '[9, 59]'),
         }
     })
 

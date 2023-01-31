@@ -1,9 +1,8 @@
 import { createTheme, Theme, ThemeProvider } from '@mui/material'
 import { blue, grey, lightBlue } from '@mui/material/colors'
 import { createContext, useMemo, useState } from 'react'
-import { IThemeContext, ThemeMode, IThemeContextProvider } from './ThemeContextTypes'
+import { ThemeContextType, ThemeMode } from 'types/appTypes'
 
-// this declare module block allows to extend Theme object by custom variables
 declare module '@mui/material/styles' {
     interface Theme {
         gradiend: string
@@ -15,7 +14,6 @@ declare module '@mui/material/styles' {
             onThemeChange: string
         }
     }
-    // allow configuration using `createTheme`
     interface ThemeOptions {
         gradiend?: string
         shape?: {
@@ -28,12 +26,12 @@ declare module '@mui/material/styles' {
     }
 }
 
-export const ThemeContext = createContext<IThemeContext>({
+export const ThemeContext = createContext<ThemeContextType>({
     toggleThemeMode: () => undefined,
     mode: ThemeMode.light,
 })
 
-export const ThemeContextProvider = ({ children }: IThemeContextProvider) => {
+export const ThemeContextProvider = ({ children }: { children: JSX.Element }) => {
     const [mode, setMode] = useState<ThemeMode>(
         localStorage.getItem('themeMode') === ThemeMode.dark ? ThemeMode.dark : ThemeMode.light
     )

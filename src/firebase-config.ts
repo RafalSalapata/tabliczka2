@@ -1,7 +1,6 @@
-import { MathAnswer } from 'contexts/MathContext/MathContextTypes'
 import { initializeApp } from 'firebase/app'
 import { getFirestore, collection, CollectionReference, Timestamp } from 'firebase/firestore'
-import { BasicOperation } from 'types/mathTypes'
+import { BasicOperation, MathAnswer } from 'types/mathTypes'
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_apiKey,

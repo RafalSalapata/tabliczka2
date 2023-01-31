@@ -8,7 +8,7 @@ import {
     TableRow,
     Theme,
 } from '@mui/material'
-import { MathAnswer } from 'contexts/MathContext/MathContextTypes'
+import { MathAnswer } from 'types/mathTypes'
 
 const tableFontSize = (isCorrect: boolean) => {
     return {

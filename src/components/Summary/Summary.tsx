@@ -2,11 +2,11 @@ import { useContext, useEffect } from 'react'
 import { Typography, Theme } from '@mui/material'
 import { addDoc, Timestamp } from 'firebase/firestore'
 import { recordsCollection, RecordType } from 'firebase-config'
-import MathContext from 'contexts/MathContext/MathContext'
-import { getEndMessage } from 'utils/mathUtils'
+import MathContext from 'contexts/MathContext'
 import SectionTitle from 'components/SectionTitle'
 import MainButton from 'components/MainButton'
 import AnswersList from 'components/AnswersList'
+import { getEndMessage } from 'utils/appUtils'
 
 const createRecord = async (record: RecordType) => {
     await addDoc<RecordType>(recordsCollection, record)
