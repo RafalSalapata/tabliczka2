@@ -39,7 +39,7 @@ const EnglishSetup: React.FC = () => {
         }
     }
 
-    const handleStartBtnClick = (): void => {
+    const onStartBtnClick = (): void => {
         if (incorrectName) {
             setValidateForm(true)
         } else {
@@ -86,7 +86,7 @@ const EnglishSetup: React.FC = () => {
             <MainButton
                 title='Start'
                 navigateTo={incorrectName ? '' : topic.path}
-                handleClick={handleStartBtnClick}
+                handleClick={onStartBtnClick}
             />
         </>
     )

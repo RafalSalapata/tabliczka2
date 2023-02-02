@@ -1,10 +1,10 @@
 import { SelectItem } from './appTypes'
 
 export const BasicOperationValue = {
-    addition: 'Addition',
-    subtraction: 'Subtraction',
-    multiplication: 'Multiplication',
-    division: 'Division',
+    addition: 'addition',
+    subtraction: 'subtraction',
+    multiplication: 'multiplication',
+    division: 'division',
 } as const
 
 export type BasicOperationValueType = typeof BasicOperationValue[keyof typeof BasicOperationValue]

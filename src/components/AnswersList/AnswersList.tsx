@@ -9,13 +9,7 @@ import {
     Theme,
 } from '@mui/material'
 import { MathAnswer } from 'types/mathTypes'
-
-const tableFontSize = (isCorrect: boolean) => {
-    return {
-        fontSize: { xs: '13px', sm: '17px' },
-        color: isCorrect ? '' : 'white',
-    }
-}
+import { tableCellStyles } from 'utils/appUtils'
 
 interface AnswersListProps {
     answerList: MathAnswer[]
@@ -53,7 +47,7 @@ const AnswersList: React.FC<AnswersListProps> = ({ answerList, operationSign, to
                                 align='right'
                                 width='8%'
                                 padding='none'
-                                sx={tableFontSize(answer.isCorrect)}
+                                sx={tableCellStyles(answer.isCorrect)}
                             >
                                 {answer.id}.
                             </TableCell>
@@ -61,7 +55,7 @@ const AnswersList: React.FC<AnswersListProps> = ({ answerList, operationSign, to
                                 align='right'
                                 padding='none'
                                 width='21%'
-                                sx={tableFontSize(answer.isCorrect)}
+                                sx={tableCellStyles(answer.isCorrect)}
                             >
                                 {`${answer.factors[1]} ${operationSign} ${answer.factors[0]}`}
                             </TableCell>
@@ -69,7 +63,7 @@ const AnswersList: React.FC<AnswersListProps> = ({ answerList, operationSign, to
                                 padding='none'
                                 align='center'
                                 width='8%'
-                                sx={tableFontSize(answer.isCorrect)}
+                                sx={tableCellStyles(answer.isCorrect)}
                             >
                                 =
                             </TableCell>
@@ -77,7 +71,7 @@ const AnswersList: React.FC<AnswersListProps> = ({ answerList, operationSign, to
                                 padding='none'
                                 align='left'
                                 width='17%'
-                                sx={tableFontSize(answer.isCorrect)}
+                                sx={tableCellStyles(answer.isCorrect)}
                             >
                                 {answer.answer}
                             </TableCell>
@@ -85,7 +79,7 @@ const AnswersList: React.FC<AnswersListProps> = ({ answerList, operationSign, to
                                 padding='none'
                                 align='left'
                                 width='46%'
-                                sx={tableFontSize(answer.isCorrect)}
+                                sx={tableCellStyles(answer.isCorrect)}
                             >
                                 {answer.isCorrect ? (
                                     ''

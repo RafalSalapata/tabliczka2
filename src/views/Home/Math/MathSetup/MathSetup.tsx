@@ -41,7 +41,7 @@ const MathSetup: React.FC = () => {
         }
     }
 
-    const handleStartBtnClick = (): void => {
+    const onStartBtnClick = (): void => {
         if (incorrectName) {
             setValidateForm(true)
         } else {
@@ -101,7 +101,7 @@ const MathSetup: React.FC = () => {
             <MainButton
                 title='Start'
                 navigateTo={incorrectName ? '' : mathOperation.path}
-                handleClick={handleStartBtnClick}
+                handleClick={onStartBtnClick}
             />
         </>
     )

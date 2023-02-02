@@ -29,3 +29,8 @@ export const getEndMessage = (correctNo: number, testLength: number): string => 
 
     return endMessage
 }
+
+export const tableCellStyles = (isCorrect: boolean) => ({
+    fontSize: { xs: '13px', sm: '17px' },
+    color: isCorrect ? '' : 'white',
+})

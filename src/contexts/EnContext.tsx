@@ -18,6 +18,12 @@ const enReducer = (state: EnStateType, action: EnReducerAction): EnStateType => 
             return { ...state, topic: action.value }
         case 'setTestLength':
             return { ...state, testLength: action.value }
+        case 'addAnswer':
+            return { ...state, answerList: [...state.answerList, action.value] }
+        case 'clearAnswerList':
+            return { ...state, answerList: [] }
+        case 'setStartTime':
+            return { ...state, startTime: Date.now() }
     }
 }
 

@@ -1,8 +1,8 @@
 import { SelectItem } from 'types/appTypes'
 
 export const EnTopicValue = {
-    animals: 'Animals',
-    clothes: 'Clothes',
+    animals: 'animals',
+    clothes: 'clothes',
 } as const
 
 export type EnTopicValueType = typeof EnTopicValue[keyof typeof EnTopicValue]
@@ -33,14 +33,15 @@ export const isEnTopic = (arg: any): arg is EnTopic => {
 ///////////////////
 // EnContextType //
 ///////////////////
-export type Fraze = {
+export type Phrase = {
+    en: string[]
     pl: string
-    en: string
+    cz: string
 }
 
 export type EnAnswer = {
     id: number
-    frase: Fraze
+    phrase: Phrase
     answer: string
     isCorrect: boolean
 }
@@ -62,3 +63,6 @@ export type EnReducerAction =
     | { type: 'setUserName'; value: string }
     | { type: 'setTopic'; value: EnTopic }
     | { type: 'setTestLength'; value: number }
+    | { type: 'addAnswer'; value: EnAnswer }
+    | { type: 'clearAnswerList' }
+    | { type: 'setStartTime' }

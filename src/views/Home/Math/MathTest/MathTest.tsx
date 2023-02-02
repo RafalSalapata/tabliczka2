@@ -3,7 +3,7 @@ import MainButton from 'components/MainButton'
 import SectionTitle from 'components/SectionTitle'
 import Summary from 'components/Summary'
 import MathContext from 'contexts/MathContext'
-import { ChangeEvent, KeyboardEvent, useContext, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
 import { MathAnswer } from 'types/mathTypes'
 import { getCorrectAnswer, getFactors } from 'utils/mathUtils'
 
@@ -66,7 +66,7 @@ const MathTest: React.FC = () => {
         }
     }
 
-    const onEnterUp = (e: KeyboardEvent) => {
+    const onEnterUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter' && currentAnswer !== '') onNextClick()
     }
 
@@ -137,12 +137,12 @@ const MathTest: React.FC = () => {
             <MainButton
                 title='Następne pytanie'
                 navigateTo=''
-                disabled={currentAnswer === '' ? true : false}
+                disabled={currentAnswer === ''}
                 handleClick={onNextClick}
             ></MainButton>
         </>
     ) : (
-        <Summary onRestartTestClick={onRestartTestClick} />
+        <Summary testType='math' onRestartTestClick={onRestartTestClick} />
     )
 }
 
