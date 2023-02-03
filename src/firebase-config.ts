@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore, collection, CollectionReference, Timestamp } from 'firebase/firestore'
-import { BasicOperation, MathAnswer } from 'types/mathTypes'
+import { getFirestore, collection, CollectionReference } from 'firebase/firestore'
+import { RecordTypeWithId } from 'types/appTypes'
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_apiKey,
@@ -14,21 +14,5 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
-
-export type RecordType = {
-    answerList: MathAnswer[]
-    correctAnswerNo: number
-    createdAt: Timestamp
-    testCategory: string
-    testDuration: number
-    testLength: number
-    testType: BasicOperation
-    testRange: [number, number]
-    userName: string
-}
-
-export type RecordTypeWithId = RecordType & {
-    id: string
-}
 
 export const recordsCollection = collection(db, 'records') as CollectionReference<RecordTypeWithId>

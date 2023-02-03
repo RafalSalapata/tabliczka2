@@ -4,6 +4,7 @@ import SectionTitle from 'components/SectionTitle'
 import Summary from 'components/Summary'
 import MathContext from 'contexts/MathContext'
 import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
+import { TestCategoryType } from 'types/appTypes'
 import { MathAnswer } from 'types/mathTypes'
 import { getCorrectAnswer, getFactors } from 'utils/mathUtils'
 
@@ -142,7 +143,7 @@ const MathTest: React.FC = () => {
             ></MainButton>
         </>
     ) : (
-        <Summary testType='math' onRestartTestClick={onRestartTestClick} />
+        <Summary testCategory={TestCategoryType.math} onRestartTestClick={onRestartTestClick} />
     )
 }
 

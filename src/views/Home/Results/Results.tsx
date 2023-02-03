@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import SectionTitle from 'components/SectionTitle'
-import { getRecords } from 'utils/resultsUtils'
-import { RecordTypeWithId } from 'firebase-config'
-import ResultCard from './components/ResultCard'
 import { Typography } from '@mui/material'
+import SectionTitle from 'components/SectionTitle'
+import ResultCard from './components/ResultCard'
+import { getRecords } from 'utils/resultsUtils'
+import { RecordTypeWithId } from 'types/appTypes'
 
 const Results: React.FC = () => {
     const [records, setRecords] = useState<RecordTypeWithId[]>([])

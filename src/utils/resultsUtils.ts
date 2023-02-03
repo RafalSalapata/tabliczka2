@@ -1,5 +1,6 @@
 import { getDocs, orderBy, query, where } from 'firebase/firestore'
-import { recordsCollection, RecordTypeWithId } from 'firebase-config'
+import { recordsCollection } from 'firebase-config'
+import { RecordTypeWithId } from 'types/appTypes'
 
 const getDateBackByDays = (daysBack: number): Date => {
     const now = new Date()

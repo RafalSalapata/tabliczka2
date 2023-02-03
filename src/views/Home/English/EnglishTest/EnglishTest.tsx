@@ -4,6 +4,7 @@ import SectionTitle from 'components/SectionTitle'
 import Summary from 'components/Summary'
 import EnContext from 'contexts/EnContext'
 import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
+import { TestCategoryType } from 'types/appTypes'
 import { EnAnswer, Phrase } from 'types/enTypes'
 import { lazyTestImport } from 'utils/englishUtils'
 
@@ -163,7 +164,7 @@ const EnglishTest: React.FC = () => {
             </>
         )
     ) : (
-        <Summary testType='english' onRestartTestClick={onRestartTestClick} />
+        <Summary testCategory={TestCategoryType.english} onRestartTestClick={onRestartTestClick} />
     )
 }
 

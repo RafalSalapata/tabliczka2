@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
     Avatar,
     Box,
@@ -20,10 +21,10 @@ import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied'
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined'
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { RecordTypeWithId } from 'firebase-config'
+import AnswersListEn from 'components/AnswersListEn'
+import AnswersListMath from 'components/AnswersList/AnswersListMath'
 import { createdAtToString, durationToString, rangeToString, ratingValue } from 'utils/resultsUtils'
-import { useState } from 'react'
-import AnswersList from 'components/AnswersList'
+import { RecordTypeWithId, TestCategoryType } from 'types/appTypes'
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean
@@ -71,6 +72,7 @@ interface ResultCardProps {
 
 const ResultCard: React.FC<ResultCardProps> = ({ record }) => {
     const [expanded, setExpanded] = useState<boolean>(false)
+    const isMath = record.testCategory === TestCategoryType.math
 
     const handleExpandClick = () => {
         setExpanded((prev) => !prev)
@@ -128,11 +130,19 @@ const ResultCard: React.FC<ResultCardProps> = ({ record }) => {
             />
             <CardContent sx={{ paddingX: 2, paddingY: 0 }}>
                 <Box sx={{ color: 'text.primary', fontSize: { xs: '17px', sm: '19px' } }}>
-                    <b>{record.testType.itemText}</b> {rangeToString(record.testRange)},{' '}
+                    {isMath ? (
+                        <span>
+                            <b>{record.mathTest?.basicOperation.itemText} </b>
+                            {record.mathTest && rangeToString(record.mathTest.range)}
+                        </span>
+                    ) : (
+                        <b>{record.enTest && record.enTest.topic.itemText}</b>
+                    )}
                     <Typography
+                        component={'span'}
                         sx={{ display: 'inline-block', fontSize: { xs: '16px', sm: '18px' } }}
                     >
-                        {durationToString(record.testDuration)}
+                        , {durationToString(record.testDuration)}
                     </Typography>
                 </Box>
             </CardContent>
@@ -155,11 +165,17 @@ const ResultCard: React.FC<ResultCardProps> = ({ record }) => {
             </CardActions>
             <Collapse in={expanded} timeout='auto' unmountOnExit>
                 <CardContent sx={{ paddingTop: 0 }}>
-                    <AnswersList
-                        answerList={record.answerList}
-                        operationSign={record.testType.sign}
-                        topMarginOff
-                    />
+                    {record.mathTest ? (
+                        <AnswersListMath
+                            answerList={record.mathTest.answerList}
+                            operationSign={record.mathTest.basicOperation.sign}
+                            topMarginOff
+                        />
+                    ) : (
+                        record.enTest && (
+                            <AnswersListEn answerList={record.enTest.answerList} topMarginOff />
+                        )
+                    )}
                 </CardContent>
             </Collapse>
         </Card>

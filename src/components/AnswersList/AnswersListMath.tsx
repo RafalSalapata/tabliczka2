@@ -11,13 +11,17 @@ import {
 import { MathAnswer } from 'types/mathTypes'
 import { tableCellStyles } from 'utils/appUtils'
 
-interface AnswersListProps {
+interface AnswersListMathProps {
     answerList: MathAnswer[]
     operationSign: string
     topMarginOff?: boolean
 }
 
-const AnswersList: React.FC<AnswersListProps> = ({ answerList, operationSign, topMarginOff }) => {
+const AnswersListMath: React.FC<AnswersListMathProps> = ({
+    answerList,
+    operationSign,
+    topMarginOff,
+}) => {
     return (
         <TableContainer
             component={Paper}
@@ -98,4 +102,4 @@ const AnswersList: React.FC<AnswersListProps> = ({ answerList, operationSign, to
     )
 }
 
-export default AnswersList
+export default AnswersListMath

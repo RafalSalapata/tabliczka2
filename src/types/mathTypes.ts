@@ -61,9 +61,6 @@ export const isBasicOperation = (arg: any): arg is BasicOperation => {
     return basicOperations.map((operation) => propsCheck(operation)).some((x) => x)
 }
 
-//////////////////////
-// MathContectTypes //
-//////////////////////
 export type MathRangeType = [number, number]
 
 export type MathAnswer = {
@@ -96,3 +93,9 @@ export type MathReducerAction =
     | { type: 'addAnswer'; value: MathAnswer }
     | { type: 'clearAnswerList' }
     | { type: 'setStartTime' }
+
+export type MathTest = {
+    basicOperation: BasicOperation
+    range: [number, number]
+    answerList: MathAnswer[]
+}

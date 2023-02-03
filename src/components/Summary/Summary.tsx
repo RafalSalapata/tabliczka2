@@ -1,29 +1,32 @@
 import { useContext, useEffect } from 'react'
 import { Typography, Theme } from '@mui/material'
-// import { addDoc, Timestamp } from 'firebase/firestore'
-// import { recordsCollection, RecordType } from 'firebase-config'
+import { addDoc, Timestamp } from 'firebase/firestore'
+import { recordsCollection } from 'firebase-config'
 import MathContext from 'contexts/MathContext'
+import EnContext from 'contexts/EnContext'
 import SectionTitle from 'components/SectionTitle'
 import MainButton from 'components/MainButton'
 import AnswersList from 'components/AnswersList'
-import { getEndMessage } from 'utils/appUtils'
-import EnContext from 'contexts/EnContext'
 import AnswersListEn from 'components/AnswersListEn'
+import { getEndMessage } from 'utils/appUtils'
+import { MathTest } from 'types/mathTypes'
+import { EnTest } from 'types/enTypes'
+import { RecordType, TestCategoryType } from 'types/appTypes'
 
-// const createRecord = async (record: RecordType) => {
-//     await addDoc<RecordType>(recordsCollection, record)
-// }
+const createRecord = async (record: RecordType): Promise<void> => {
+    await addDoc<RecordType>(recordsCollection, record)
+}
 
 interface SummaryProps {
-    testType: string
+    testCategory: TestCategoryType
     onRestartTestClick: () => void
 }
 
-const Summary: React.FC<SummaryProps> = ({ testType, onRestartTestClick }) => {
+const Summary: React.FC<SummaryProps> = ({ testCategory, onRestartTestClick }) => {
     const { mathState } = useContext(MathContext)
     const { enState } = useContext(EnContext)
 
-    const isMath = testType === 'math'
+    const isMath = testCategory === TestCategoryType.math
     const state = isMath ? mathState : enState
     const correctAnswerNo = isMath
         ? mathState.answerList.filter((answer) => answer.isCorrect).length
@@ -31,37 +34,51 @@ const Summary: React.FC<SummaryProps> = ({ testType, onRestartTestClick }) => {
 
     const endMessage = getEndMessage(correctAnswerNo, state.testLength)
 
-    // useEffect(() => {
-    //     const testStartTime = isMath ? mathState.testStartTime : enState.startTime
-    //     const duration: number = Date.now() - testStartTime
+    useEffect(() => {
+        const testStartTime = isMath ? mathState.testStartTime : enState.startTime
+        const duration: number = Date.now() - testStartTime
 
-    //     const record: RecordType = {
-    //         answerList: state.answerList,
-    //         correctAnswerNo: correctAnswerNo,
-    //         createdAt: Timestamp.fromDate(new Date()),
-    //         testCategory: testType,
-    //         testDuration: duration,
-    //         testLength: state.testLength,
-    //         testType: isMath ? mathState.mathOperation : null,
-    //         testRange: isMath ? mathState.mathRange : null,
-    //         topic: isMath ? null : enState.topic,
-    //         userName: state.userName,
-    //     }
+        const mathTest: MathTest | null = isMath
+            ? {
+                  basicOperation: mathState.mathOperation,
+                  range: mathState.mathRange,
+                  answerList: mathState.answerList,
+              }
+            : null
 
-    //     createRecord(record)
-    // }, [
-    //     correctAnswerNo,
-    //     enState.startTime,
-    //     enState.topic,
-    //     isMath,
-    //     mathState.mathOperation,
-    //     mathState.mathRange,
-    //     mathState.testStartTime,
-    //     state.answerList,
-    //     state.testLength,
-    //     state.userName,
-    //     testType,
-    // ])
+        const enTest: EnTest | null = isMath
+            ? null
+            : {
+                  topic: enState.topic,
+                  answerList: enState.answerList,
+              }
+
+        const record: RecordType = {
+            userName: state.userName,
+            testCategory: testCategory,
+            createdAt: Timestamp.fromDate(new Date()),
+            testDuration: duration,
+            testLength: state.testLength,
+            correctAnswerNo: correctAnswerNo,
+            mathTest: mathTest,
+            enTest: enTest,
+        }
+
+        createRecord(record)
+    }, [
+        correctAnswerNo,
+        enState.answerList,
+        enState.startTime,
+        enState.topic,
+        isMath,
+        mathState.answerList,
+        mathState.mathOperation,
+        mathState.mathRange,
+        mathState.testStartTime,
+        state.testLength,
+        state.userName,
+        testCategory,
+    ])
 
     return (
         <>
