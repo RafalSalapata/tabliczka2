@@ -113,19 +113,26 @@ const EnglishTest: React.FC = () => {
                             color: 'white',
                             fontFamily: 'Just Me Again Down Here',
                             textAlign: 'center',
-                            marginTop: '45px',
+                            marginTop: '40px',
+                            lineHeight: 1,
                         }}
                     >
-                        {`Przetłumacz: ${currentPhrase?.pl}`}
+                        Przetłumacz:
+                        <br />
+                        {currentPhrase?.pl}
                     </Typography>
                     <TextField
                         type='text'
                         value={userAnswer}
+                        autoCapitalize='none'
                         autoFocus
-                        autoComplete='off'
+                        autoCorrect='none'
+                        autoComplete={'off'}
                         onChange={onInputChange}
                         onKeyUp={onEnterUp}
                         inputRef={inputRef}
+                        multiline
+                        rows={1.6}
                         inputProps={{
                             sx: {
                                 fontFamily: 'Just Me Again Down Here',
@@ -134,16 +141,22 @@ const EnglishTest: React.FC = () => {
                                 paddingTop: '0px',
                                 paddingBottom: '5px',
                                 textAlign: 'center',
+                                lineHeight: 0.9,
                             },
                         }}
                         sx={{
-                            mt: '20px',
-                            width: '150px',
-                            fontSize: '34px',
+                            mt: '10px',
+                            width: '78%',
+                            fontSize: '32px',
                             '& .MuiOutlinedInput-root': {
+                                paddingX: 0.5,
+                                paddingY: 1,
                                 '& fieldset': {
                                     borderColor: '#7ac297',
                                 },
+                            },
+                            '& .MuiInputBase-input': {
+                                overflow: 'hidden',
                             },
                             'input::-webkit-outer-spin-button, input::-webkit-inner-spin-button': {
                                 WebkitAppearance: 'none',

@@ -13,12 +13,12 @@ const family: Phrase[] = [
         cz: 'otec',
     },
     {
-        en: ['dad'],
+        en: ['dad', 'daddy'],
         pl: 'tata',
         cz: 'táto',
     },
     {
-        en: ['mum'],
+        en: ['mum', 'mummy'],
         pl: 'mama',
         cz: 'maminka',
     },
@@ -108,7 +108,7 @@ const family: Phrase[] = [
         cz: 'Basia je Aliho sestra',
     },
     {
-        en: ["Rafał is Basia' dad"],
+        en: ["Rafał is Basia's dad"],
         pl: 'Rafał jest tatą Basi',
         cz: 'Rafał je Basiin otec',
     },

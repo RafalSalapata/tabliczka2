@@ -68,7 +68,7 @@ const clothes: Phrase[] = [
         cz: 'tepláková souprava',
     },
     {
-        en: ['trousers'],
+        en: ['trousers', 'pants'],
         pl: 'spodnie',
         cz: 'kalhoty',
     },

@@ -118,7 +118,7 @@ const house: Phrase[] = [
         cz: '',
     },
     {
-        en: ['Chair is next to Basia'],
+        en: ['The chair is next to Basia'],
         pl: 'Krzesło jest obok Basi',
         cz: '',
     },

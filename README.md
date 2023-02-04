@@ -7,3 +7,8 @@ It has two main purposes. First educational (see 'About the app' below) and seco
 
 The application was created for my daughters to help them learn basic of mathematics, Polish and English. It's best suited for children between the ages of 6 and 12.
 The application is deployed via Firebase Hosting under this addrss: https://tabliczka-rs.web.app
+
+# Release notes
+
+2.1.0 - english tests handling, minor UI improvements
+2.1.1 - input field in en test was improved,
