@@ -1,9 +1,13 @@
+import { useContext } from 'react'
 import { Box } from '@mui/material'
+import AppContext from 'contexts/AppContext'
+import { JustifyContentEnum } from 'types/appTypes'
 import MainButton from 'components/MainButton'
-import { JustifyContentEnum } from 'components/MainButton/MainButtonTypes'
 import SectionTitle from 'components/SectionTitle'
 
 const Home: React.FC = () => {
+    const { localization } = useContext(AppContext)
+
     return (
         <Box
             sx={{
@@ -13,28 +17,28 @@ const Home: React.FC = () => {
                 alignItems: 'center',
             }}
         >
-            <SectionTitle title='Lekcja' />
+            <SectionTitle title={localization.home.lesson} />
             <MainButton
-                title='Matematyka'
+                title={localization.home.math}
                 navigateTo='matematyka'
                 imageSrc='assets/math-button.png'
                 justifyContent={JustifyContentEnum.left}
             />
             <MainButton
-                title='Angielski'
+                title={localization.home.english}
                 navigateTo='angielski'
                 imageSrc='assets/english-button.png'
                 justifyContent={JustifyContentEnum.left}
             />
             <MainButton
-                title='Ortografia (wkrótce)'
+                title={localization.home.spelling}
                 navigateTo=''
                 disabled={true}
                 imageSrc='assets/spelling-button.png'
                 justifyContent={JustifyContentEnum.left}
             />
             <MainButton
-                title='Ostatnie wyniki'
+                title={localization.home.lastResults}
                 navigateTo='wyniki'
                 imageSrc='assets/results-button.png'
                 justifyContent={JustifyContentEnum.left}

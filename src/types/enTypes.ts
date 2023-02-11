@@ -65,7 +65,6 @@ export type EnAnswer = {
 }
 
 export type EnStateType = {
-    userName: string
     testLength: number
     topic: EnTopic
     answerList: EnAnswer[]
@@ -78,7 +77,6 @@ export type EnContextType = {
 }
 
 export type EnReducerAction =
-    | { type: 'setUserName'; value: string }
     | { type: 'setTopic'; value: EnTopic }
     | { type: 'setTestLength'; value: number }
     | { type: 'addAnswer'; value: EnAnswer }

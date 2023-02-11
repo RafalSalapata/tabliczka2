@@ -1,15 +1,17 @@
+import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
 import { Box, TextField, Typography } from '@mui/material'
 import MainButton from 'components/MainButton'
 import SectionTitle from 'components/SectionTitle'
 import Summary from 'components/Summary'
+import AppContext from 'contexts/AppContext'
 import MathContext from 'contexts/MathContext'
-import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
 import { TestCategoryType } from 'types/appTypes'
 import { MathAnswer } from 'types/mathTypes'
 import { getCorrectAnswer, getFactors } from 'utils/mathUtils'
 
 const MathTest: React.FC = () => {
     const { mathState, mathDispatch } = useContext(MathContext)
+    const { localization } = useContext(AppContext)
 
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -73,7 +75,7 @@ const MathTest: React.FC = () => {
 
     return !displaySummary ? (
         <>
-            <SectionTitle title={`Pytanie nr ${currentQuestion}`} />
+            <SectionTitle title={`${localization.test.questionNo} ${currentQuestion}`} />
             <Box
                 sx={{
                     marginTop: '10px',
@@ -96,7 +98,7 @@ const MathTest: React.FC = () => {
                         marginTop: '45px',
                     }}
                 >
-                    {`Ile wynosi: ${factors[1]}${mathState.mathOperation.sign}${factors[0]}?`}
+                    {`${localization.test.howMuch} ${factors[1]}${mathState.mathOperation.sign}${factors[0]}?`}
                 </Typography>
                 <TextField
                     type='number'
@@ -136,7 +138,7 @@ const MathTest: React.FC = () => {
                 />
             </Box>
             <MainButton
-                title='Następne pytanie'
+                title={localization.test.nextQuestion}
                 navigateTo=''
                 disabled={currentAnswer === ''}
                 handleClick={onNextClick}

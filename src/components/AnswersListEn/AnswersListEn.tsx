@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import {
     Paper,
     Table,
@@ -6,64 +7,70 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    Theme,
 } from '@mui/material'
+import AppContext from 'contexts/AppContext'
 import { EnAnswer } from 'types/enTypes'
-import { tableCellStyles } from 'utils/appUtils'
+import { sxClasses } from './styles'
 
 interface AnswersListEnProps {
     answerList: EnAnswer[]
-    topMarginOff?: boolean
+    topMarginOn?: boolean
 }
 
-const AnswersListEn: React.FC<AnswersListEnProps> = ({ answerList, topMarginOff }) => {
+const AnswersListEn: React.FC<AnswersListEnProps> = ({ answerList, topMarginOn = true }) => {
+    const { localization } = useContext(AppContext)
     return (
         <TableContainer
             component={Paper}
-            sx={(theme: Theme) => ({
-                mt: topMarginOff ? 0 : theme.shape.marginTop,
-                padding: '2px 5px 5px 5px',
-                boxShadow: theme.shadows[4],
-            })}
+            sx={[sxClasses.container, topMarginOn && sxClasses.topMargin]}
         >
             <Table size='small' aria-label='answer list'>
                 <TableHead>
                     <TableRow>
                         <TableCell align='left' colSpan={6} sx={{ fontSize: '20px' }}>
-                            Odpowiedzi
+                            {localization.summary.answers}
                         </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {answerList.map((answer) => (
-                        <TableRow
-                            key={answer.id}
-                            sx={(theme: Theme) => ({
-                                background: answer.isCorrect ? '' : theme.palette.error.light,
-                            })}
-                        >
-                            <TableCell
-                                align='right'
-                                width='10%'
-                                padding='none'
-                                sx={tableCellStyles(answer.isCorrect)}
+                    {answerList.map((answer) => {
+                        return (
+                            <TableRow
+                                key={answer.id}
+                                sx={[!answer.isCorrect && sxClasses.tableRow]}
                             >
-                                {answer.id}.
-                            </TableCell>
-                            <TableCell
-                                align='left'
-                                padding='none'
-                                width='90%'
-                                sx={[tableCellStyles(answer.isCorrect), { pl: '8px' }]}
-                            >
-                                {`${answer.phrase.pl} = "${answer.answer}"${
-                                    answer.isCorrect
-                                        ? ''
-                                        : `, powinno być ${answer.phrase.en.join(', ')}`
-                                }`}
-                            </TableCell>
-                        </TableRow>
-                    ))}
+                                <TableCell
+                                    align='right'
+                                    width='10%'
+                                    padding='none'
+                                    sx={[
+                                        sxClasses.tableCell,
+                                        !answer.isCorrect && sxClasses.colorWhite,
+                                    ]}
+                                >
+                                    {answer.id}.
+                                </TableCell>
+                                <TableCell
+                                    align='left'
+                                    width='90%'
+                                    padding='none'
+                                    sx={[
+                                        sxClasses.tableCell,
+                                        sxClasses.leftPadding,
+                                        !answer.isCorrect && sxClasses.colorWhite,
+                                    ]}
+                                >
+                                    {`${answer.phrase.pl} = "${answer.answer}"${
+                                        answer.isCorrect
+                                            ? ''
+                                            : `, ${
+                                                  localization.summary.shouldBe
+                                              } ${answer.phrase.en.join(', ')}`
+                                    }`}
+                                </TableCell>
+                            </TableRow>
+                        )
+                    })}
                 </TableBody>
             </Table>
         </TableContainer>

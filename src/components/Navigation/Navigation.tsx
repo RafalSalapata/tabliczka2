@@ -1,18 +1,9 @@
-import { Breadcrumbs, Theme, Typography } from '@mui/material'
+import { useContext } from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
+import { Breadcrumbs, Theme, Typography } from '@mui/material'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import { styled } from '@mui/system'
-
-const breadcrumbNameMap: { [key: string]: string } = {
-    '/matematyka': 'Matematyka',
-    '/matematyka/dodawanie': 'Dodawanie',
-    '/matematyka/odejmowanie': 'Odejmowanie',
-    '/matematyka/mnozenie': 'Mnożenie',
-    '/matematyka/dzielenie': 'Dzielenie',
-    '/angielski': 'Angielski',
-    '/angielski/kolory': 'Kolory',
-    '/wyniki': 'Wyniki',
-}
+import AppContext from 'contexts/AppContext'
 
 const BreadcrumbLinkStyled = styled(RouterLink)(({ theme }) => {
     return {
@@ -40,8 +31,31 @@ const BreadcrumbLinkStyled = styled(RouterLink)(({ theme }) => {
 })
 
 const Navigation: React.FC = () => {
+    const { localization } = useContext(AppContext)
     const location = useLocation()
     const pathnames = location.pathname.split('/').filter((x) => x)
+
+    const breadcrumbNameMap: { [key: string]: string } = {
+        '/matematyka': localization.home.math,
+        '/matematyka/dodawanie': localization.testName.addition,
+        '/matematyka/odejmowanie': localization.testName.subtraction,
+        '/matematyka/mnozenie': localization.testName.multiplication,
+        '/matematyka/dzielenie': localization.testName.division,
+        '/angielski': localization.home.english,
+        '/angielski/rodzina': localization.testName.family,
+        '/angielski/zwierzeta': localization.testName.animals,
+        '/angielski/urodziny': localization.testName.birthday,
+        '/angielski/ubrania-1': localization.testName.clothesEasy,
+        '/angielski/ubrania-2': localization.testName.clothes,
+        '/angielski/kolory-1': localization.testName.colorsEasy,
+        '/angielski/kolory-2': localization.testName.colors,
+        '/angielski/dom': localization.testName.hause,
+        '/angielski/polozenie': localization.testName.positions,
+        '/angielski/liczby-1': localization.testName.numbersEasy,
+        '/angielski/liczby-2': localization.testName.numbers,
+        '/angielski/czas': localization.testName.time,
+        '/wyniki': localization.home.lastResults,
+    }
 
     return (
         <Breadcrumbs

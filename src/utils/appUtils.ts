@@ -8,29 +8,31 @@ export const sliderValueToTestLength = (value: number): number => {
     }
 }
 
-export const getEndMessage = (correctNo: number, testLength: number): string => {
+export const getEndMessage = (
+    correctNo: number,
+    testLength: number,
+    master: string,
+    notBad: string,
+    couldBeBetter: string,
+    poor: string
+): string => {
     const ratio = correctNo / testLength
     let endMessage: string
 
     switch (true) {
         case ratio > 0.9:
-            endMessage = 'Mistrzunio! :D'
+            endMessage = master
             break
         case ratio > 0.75:
-            endMessage = 'Nieźle :)'
+            endMessage = notBad
             break
         case ratio > 0.6:
-            endMessage = 'Nie ma tragedii'
+            endMessage = couldBeBetter
             break
         default:
-            endMessage = 'Cienizna :('
+            endMessage = poor
             break
     }
 
     return endMessage
 }
-
-export const tableCellStyles = (isCorrect: boolean) => ({
-    fontSize: { xs: '13px', sm: '17px' },
-    color: isCorrect ? '' : 'white',
-})

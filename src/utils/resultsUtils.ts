@@ -23,11 +23,11 @@ export const getRecords = async (daysBack: number): Promise<RecordTypeWithId[]> 
     return data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
 }
 
-export const durationToString = (duration: number): string => {
+export const durationToString = (duration: number, timeLocalization: string): string => {
     const durationInSec = Math.ceil(duration / 1000)
     const m = Math.floor(durationInSec / 60)
     const s = durationInSec - 60 * m
-    return `czas: ${m}:${minTwoDigits(s)}`
+    return `${timeLocalization}: ${m}:${minTwoDigits(s)}`
 }
 
 export const rangeToString = ([range_min, range_max]: [number, number]) => {

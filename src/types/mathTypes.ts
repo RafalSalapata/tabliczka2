@@ -72,7 +72,6 @@ export type MathAnswer = {
 }
 
 export type MathStateType = {
-    userName: string
     testLength: number
     mathOperation: BasicOperation
     mathRange: MathRangeType
@@ -86,7 +85,6 @@ export type MathContextType = {
 }
 
 export type MathReducerAction =
-    | { type: 'setUserName'; value: string }
     | { type: 'setTestLength'; value: number }
     | { type: 'setMathOperation'; value: BasicOperation }
     | { type: 'setMathRange'; value: MathRangeType }

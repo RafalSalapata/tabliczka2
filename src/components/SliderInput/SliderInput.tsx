@@ -80,10 +80,8 @@ const SliderInput: React.FC<IInputFieldProps> = ({
                 valueLabelDisplay='on'
                 max={maxValue ?? 100}
                 min={minValue ?? 2}
-                // getAriaLabel={() => 'Minimum distance shift'}
                 value={value}
                 onChange={handleChange}
-                // getAriaValueText={valuetext}
                 disableSwap
                 scale={scale}
                 sx={{

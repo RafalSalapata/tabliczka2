@@ -1,19 +1,31 @@
-import { useContext } from 'react'
+import { ChangeEvent, useContext, useState } from 'react'
 import { DarkMode, LightMode } from '@mui/icons-material'
 import { Box, IconButton, FormControl, NativeSelect, InputBase, Theme } from '@mui/material'
-import { ThemeContext } from 'contexts/ThemeContext'
-import { ThemeMode } from 'types/appTypes'
 import { styled } from '@mui/system'
+import { ThemeContext } from 'contexts/ThemeContext'
+import AppContext from 'contexts/AppContext'
+import { LanguageType, ThemeMode } from 'types/appTypes'
+import { localStorageKeys } from 'utils/constants'
 
 const AppSettingsMenu: React.FC = () => {
+    const { appDispatch } = useContext(AppContext)
     const { mode, toggleThemeMode } = useContext(ThemeContext)
+    const [language, setLanguage] = useState<string>(
+        localStorage.getItem(localStorageKeys.app.LANGUAGE) ?? 'pl'
+    )
 
     const handleThemeChange = () => {
         toggleThemeMode()
         localStorage.setItem(
-            'themeMode',
+            localStorageKeys.app.THEME_MODE,
             mode === ThemeMode.light ? ThemeMode.dark : ThemeMode.light
         )
+    }
+
+    const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        setLanguage(e.target.value)
+        appDispatch({ type: 'setLanguage', value: e.target.value as LanguageType })
+        localStorage.setItem(localStorageKeys.app.LANGUAGE, e.target.value)
     }
 
     const themeTooglerIconStyles = (theme: Theme) => {
@@ -51,7 +63,8 @@ const AppSettingsMenu: React.FC = () => {
                 <NativeSelect
                     fullWidth
                     variant='standard'
-                    defaultValue='pl'
+                    value={language}
+                    onChange={handleLanguageChange}
                     input={
                         <InputBase
                             sx={(theme: Theme) => {

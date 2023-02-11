@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import {
     Avatar,
     Box,
@@ -22,7 +22,8 @@ import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import AnswersListEn from 'components/AnswersListEn'
-import AnswersListMath from 'components/AnswersList/AnswersListMath'
+import AnswersListMath from 'components/AnswersListMath/AnswersListMath'
+import AppContext from 'contexts/AppContext'
 import { createdAtToString, durationToString, rangeToString, ratingValue } from 'utils/resultsUtils'
 import { RecordTypeWithId, TestCategoryType } from 'types/appTypes'
 
@@ -54,11 +55,11 @@ const StyledRating = styled(Rating)(({ theme }) => ({
 const customIcons: {
     [index: string]: { icon: React.ReactElement; label: string }
 } = {
-    1: { icon: <SentimentVeryDissatisfiedIcon color='error' />, label: 'Bardzo dobrze' },
-    2: { icon: <SentimentDissatisfiedIcon color='error' />, label: 'Dobrze' },
-    3: { icon: <SentimentSatisfiedIcon color='warning' />, label: 'Tak sobie' },
-    4: { icon: <SentimentSatisfiedAltIcon color='success' />, label: 'Słabo' },
-    5: { icon: <SentimentVerySatisfiedIcon color='success' />, label: 'Bardzo słabo' },
+    1: { icon: <SentimentVeryDissatisfiedIcon color='error' />, label: 'Very poor' },
+    2: { icon: <SentimentDissatisfiedIcon color='error' />, label: 'Poor' },
+    3: { icon: <SentimentSatisfiedIcon color='warning' />, label: 'Not bad' },
+    4: { icon: <SentimentSatisfiedAltIcon color='success' />, label: 'Good' },
+    5: { icon: <SentimentVerySatisfiedIcon color='success' />, label: 'Very good' },
 }
 
 function IconContainer(props: IconContainerProps) {
@@ -71,6 +72,7 @@ interface ResultCardProps {
 }
 
 const ResultCard: React.FC<ResultCardProps> = ({ record }) => {
+    const { localization } = useContext(AppContext)
     const [expanded, setExpanded] = useState<boolean>(false)
     const isMath = record.testCategory === TestCategoryType.math
 
@@ -142,7 +144,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ record }) => {
                         component={'span'}
                         sx={{ display: 'inline-block', fontSize: { xs: '16px', sm: '18px' } }}
                     >
-                        , {durationToString(record.testDuration)}
+                        , {durationToString(record.testDuration, localization.results.time)}
                     </Typography>
                 </Box>
             </CardContent>
@@ -169,11 +171,14 @@ const ResultCard: React.FC<ResultCardProps> = ({ record }) => {
                         <AnswersListMath
                             answerList={record.mathTest.answerList}
                             operationSign={record.mathTest.basicOperation.sign}
-                            topMarginOff
+                            topMarginOn={false}
                         />
                     ) : (
                         record.enTest && (
-                            <AnswersListEn answerList={record.enTest.answerList} topMarginOff />
+                            <AnswersListEn
+                                answerList={record.enTest.answerList}
+                                topMarginOn={false}
+                            />
                         )
                     )}
                 </CardContent>

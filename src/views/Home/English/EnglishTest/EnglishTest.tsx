@@ -1,15 +1,17 @@
+import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
 import { Box, TextField, Typography } from '@mui/material'
 import MainButton from 'components/MainButton'
 import SectionTitle from 'components/SectionTitle'
 import Summary from 'components/Summary'
+import AppContext from 'contexts/AppContext'
 import EnContext from 'contexts/EnContext'
-import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
 import { TestCategoryType } from 'types/appTypes'
 import { EnAnswer, Phrase } from 'types/enTypes'
 import { lazyTestImport } from 'utils/englishUtils'
 
 const EnglishTest: React.FC = () => {
     const { enState, enDispatch } = useContext(EnContext)
+    const { appState, localization } = useContext(AppContext)
 
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -32,9 +34,7 @@ const EnglishTest: React.FC = () => {
 
     useEffect(() => {
         lazyTestImport(enState.topic.itemValue)
-            .then((test) => {
-                return test.sort(() => Math.random() - 0.5)
-            })
+            .then((test) => test.sort(() => Math.random() - 0.5))
             .then((shuffledTest) => {
                 const testLength = Math.min(shuffledTest.length, enState.testLength)
                 setTestLength(testLength)
@@ -42,9 +42,11 @@ const EnglishTest: React.FC = () => {
                 setPhrases(shuffledTest)
             })
             .catch((error) => {
-                setErrMsg('Ups... coś poszło nie tak. Sprawdź proszę połączenie z internetem.')
+                setErrMsg(localization.test.lazyLoadingError)
                 throw new Error(error)
             })
+        // we don't want to load it again when language is changed
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [enState.topic.itemValue, enState.testLength, enDispatch])
 
     const onNextClick = () => {
@@ -93,7 +95,7 @@ const EnglishTest: React.FC = () => {
             <Typography variant='h5'>{errMsg}</Typography>
         ) : (
             <>
-                <SectionTitle title={`Pytanie nr ${currentQuestion}`} />
+                <SectionTitle title={`${localization.test.questionNo} ${currentQuestion}`} />
                 <Box
                     sx={{
                         marginTop: '10px',
@@ -117,23 +119,21 @@ const EnglishTest: React.FC = () => {
                             lineHeight: 1,
                         }}
                     >
-                        Przetłumacz:
+                        {localization.test.translate}
                         <br />
-                        {currentPhrase?.pl}
+                        {appState.language === 'pl' ? currentPhrase?.pl : currentPhrase?.cz}
                     </Typography>
                     <TextField
                         type='text'
                         value={userAnswer}
-                        autoCapitalize='none'
                         autoFocus
-                        autoCorrect='none'
-                        autoComplete={'off'}
                         onChange={onInputChange}
                         onKeyUp={onEnterUp}
                         inputRef={inputRef}
-                        multiline
-                        rows={1.6}
                         inputProps={{
+                            autoCapitalize: 'none',
+                            autoCorrect: 'none',
+                            autoComplete: 'off',
                             sx: {
                                 fontFamily: 'Just Me Again Down Here',
                                 fontSize: '40px',
@@ -141,7 +141,6 @@ const EnglishTest: React.FC = () => {
                                 paddingTop: '0px',
                                 paddingBottom: '5px',
                                 textAlign: 'center',
-                                lineHeight: 0.9,
                             },
                         }}
                         sx={{
@@ -169,7 +168,7 @@ const EnglishTest: React.FC = () => {
                     />
                 </Box>
                 <MainButton
-                    title='Następne pytanie'
+                    title={localization.test.nextQuestion}
                     navigateTo=''
                     disabled={userAnswer === ''}
                     handleClick={onNextClick}

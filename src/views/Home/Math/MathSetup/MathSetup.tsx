@@ -1,3 +1,4 @@
+import React, { useContext, useEffect, useState } from 'react'
 import InputField from 'components/InputField'
 import MainButton from 'components/MainButton'
 import SectionTitle from 'components/SectionTitle'
@@ -5,16 +6,16 @@ import SelectMenu from 'components/SelectMenu'
 import SliderInput from 'components/SliderInput'
 import { SliderValueType } from 'components/SliderInput/SliderInput'
 import MathContext from 'contexts/MathContext'
-import { MathRangeType } from 'types/mathTypes'
-import React, { useContext, useEffect, useState } from 'react'
+import AppContext from 'contexts/AppContext'
+import { MathRangeType, BasicOperation, basicOperations } from 'types/mathTypes'
 import { localStorageKeys } from 'utils/constants'
-import { BasicOperation, basicOperations } from 'types/mathTypes'
 import { sliderValueToTestLength } from 'utils/appUtils'
 
 const MathSetup: React.FC = () => {
     const { mathState, mathDispatch } = useContext(MathContext)
+    const { appState, appDispatch, localization } = useContext(AppContext)
 
-    const [userName, setUserName] = useState<string>(mathState.userName)
+    const [userName, setUserName] = useState<string>(appState.userName)
     const [incorrectName, setIncorrectName] = useState<boolean>(false)
     const [validateForm, setValidateForm] = useState<boolean>(false)
     const [mathOperation, setMathOperation] = useState<BasicOperation>(mathState.mathOperation)
@@ -59,7 +60,7 @@ const MathSetup: React.FC = () => {
             )
             window.localStorage.setItem(localStorageKeys.math.TEST_LENGTH, testLength.toString())
 
-            mathDispatch({ type: 'setUserName', value: userName })
+            appDispatch({ type: 'setUserName', value: userName })
             mathDispatch({ type: 'setMathOperation', value: mathOperation })
             mathDispatch({ type: 'setMathRange', value: mathRange as MathRangeType })
             mathDispatch({ type: 'setTestLength', value: testLength })
@@ -68,16 +69,18 @@ const MathSetup: React.FC = () => {
 
     return (
         <>
-            <SectionTitle title='Ustawienia' />
+            <SectionTitle title={localization.setup.settings} />
             <InputField
                 value={userName}
-                label='Twoje imię'
+                label={localization.setup.yourName}
                 setValue={setUserName}
                 error={validateForm && incorrectName}
-                helperText={validateForm && incorrectName ? 'Imię musi mieć od 3 do 20 znaków' : ''}
+                helperText={
+                    validateForm && incorrectName ? localization.setup.incorrectNameMgs : ''
+                }
             />
             <SliderInput
-                label='Liczba pytań'
+                label={localization.setup.numberOfQuestions}
                 value={testLengthSliderValue}
                 setValue={setTestLengthSliderValue}
                 minValue={2}
@@ -86,12 +89,12 @@ const MathSetup: React.FC = () => {
             />
             <SelectMenu
                 value={mathOperation.itemValue}
-                label='Działanie'
+                label={localization.setup.operation}
                 setValue={setMathOperationSelect}
                 itemList={basicOperations}
             />
             <SliderInput
-                label='Zakres'
+                label={localization.setup.range}
                 value={mathRange}
                 setValue={setMathRange}
                 minValue={2}

@@ -1,6 +1,8 @@
 export const localStorageKeys = {
     app: {
         USER_NAME: 'tabliczka-user-name',
+        LANGUAGE: 'tabliczka-language',
+        THEME_MODE: 'tabliczka-theme-mode',
     },
     math: {
         OPERATION: 'tabliczka-math-operation',

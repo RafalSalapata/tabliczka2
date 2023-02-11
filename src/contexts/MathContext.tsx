@@ -4,7 +4,6 @@ import { localStorageKeys } from 'utils/constants'
 import { isBasicOperation } from 'types/mathTypes'
 
 const initMathState: MathStateType = {
-    userName: '',
     testLength: 10,
     mathOperation: basicOperations[0],
     mathRange: [9, 59],
@@ -14,8 +13,6 @@ const initMathState: MathStateType = {
 
 const mathReducer = (state: MathStateType, action: MathReducerAction): MathStateType => {
     switch (action.type) {
-        case 'setUserName':
-            return { ...state, userName: action.value }
         case 'setTestLength':
             return { ...state, testLength: action.value }
         case 'setMathOperation':
@@ -42,7 +39,6 @@ export const MathContextProvider = ({ children }: { children: ReactNode }) => {
 
         return {
             ...initMathState,
-            userName: localStorage.getItem(localStorageKeys.app.USER_NAME) ?? '',
             testLength: Number(localStorage.getItem(localStorageKeys.math.TEST_LENGTH) ?? 10),
             mathOperation:
                 operation && isBasicOperation(JSON.parse(operation))

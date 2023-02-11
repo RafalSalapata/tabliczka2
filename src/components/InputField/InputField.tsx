@@ -32,42 +32,38 @@ const InputField: React.FC<InputFieldProps> = ({ value, label, setValue, error, 
                         transition: (theme: Theme) => theme.customTransitions.onThemeChange,
                     },
                 }}
-                sx={(theme: Theme) => {
-                    return {
-                        mt: theme.shape.marginTop,
-                        lineHeight: '0px',
-                        '& label.Mui-focused': {
-                            color: error ? theme.palette.error.main : theme.palette.primary.main,
+                sx={(theme: Theme) => ({
+                    mt: theme.shape.marginTop,
+                    lineHeight: '0px',
+                    '& label.Mui-focused': {
+                        color: error ? theme.palette.error.main : theme.palette.primary.main,
+                    },
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderColor: theme.palette.primary.main,
                         },
-                        '& .MuiOutlinedInput-root': {
-                            '& fieldset': {
-                                borderColor: theme.palette.primary.main,
-                            },
-                            '&:hover fieldset': {
-                                borderColor: theme.palette.primary.main,
-                            },
-                            '&.Mui-focused fieldset': {
-                                borderColor: error ? theme.palette.error.main : '',
-                            },
+                        '&:hover fieldset': {
+                            borderColor: theme.palette.primary.main,
                         },
-                        'MuiFormHelperText-root': {
-                            margin: 0,
-                            color: 'blue',
-                            position: 'relative',
-                            top: 0,
+                        '&.Mui-focused fieldset': {
+                            borderColor: error ? theme.palette.error.main : '',
                         },
-                    }
-                }}
+                    },
+                    'MuiFormHelperText-root': {
+                        margin: 0,
+                        color: 'blue',
+                        position: 'relative',
+                        top: 0,
+                    },
+                })}
             />
             <FormHelperText
-                sx={(theme: Theme) => {
-                    return {
-                        margin: 0,
-                        height: '0px',
-                        color: theme.palette.error.main,
-                        fontSize: { xs: '11px', sm: '12px' },
-                    }
-                }}
+                sx={(theme: Theme) => ({
+                    margin: 0,
+                    height: '0px',
+                    color: theme.palette.error.main,
+                    fontSize: { xs: '11px', sm: '12px' },
+                })}
             >
                 {helperText ?? ''}
             </FormHelperText>

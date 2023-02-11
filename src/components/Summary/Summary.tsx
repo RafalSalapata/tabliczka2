@@ -4,9 +4,10 @@ import { addDoc, Timestamp } from 'firebase/firestore'
 import { recordsCollection } from 'firebase-config'
 import MathContext from 'contexts/MathContext'
 import EnContext from 'contexts/EnContext'
+import AppContext from 'contexts/AppContext'
 import SectionTitle from 'components/SectionTitle'
 import MainButton from 'components/MainButton'
-import AnswersList from 'components/AnswersList'
+import AnswersList from 'components/AnswersListMath'
 import AnswersListEn from 'components/AnswersListEn'
 import { getEndMessage } from 'utils/appUtils'
 import { MathTest } from 'types/mathTypes'
@@ -23,6 +24,7 @@ interface SummaryProps {
 }
 
 const Summary: React.FC<SummaryProps> = ({ testCategory, onRestartTestClick }) => {
+    const { appState, localization } = useContext(AppContext)
     const { mathState } = useContext(MathContext)
     const { enState } = useContext(EnContext)
 
@@ -32,7 +34,14 @@ const Summary: React.FC<SummaryProps> = ({ testCategory, onRestartTestClick }) =
         ? mathState.answerList.filter((answer) => answer.isCorrect).length
         : enState.answerList.filter((answer) => answer.isCorrect).length
 
-    const endMessage = getEndMessage(correctAnswerNo, state.testLength)
+    const endMessage = getEndMessage(
+        correctAnswerNo,
+        state.testLength,
+        localization.summary.master,
+        localization.summary.notBad,
+        localization.summary.couldBeBetter,
+        localization.summary.poor
+    )
 
     useEffect(() => {
         const testStartTime = isMath ? mathState.testStartTime : enState.startTime
@@ -54,7 +63,7 @@ const Summary: React.FC<SummaryProps> = ({ testCategory, onRestartTestClick }) =
               }
 
         const record: RecordType = {
-            userName: state.userName,
+            userName: appState.userName,
             testCategory: testCategory,
             createdAt: Timestamp.fromDate(new Date()),
             testDuration: duration,
@@ -76,13 +85,13 @@ const Summary: React.FC<SummaryProps> = ({ testCategory, onRestartTestClick }) =
         mathState.mathRange,
         mathState.testStartTime,
         state.testLength,
-        state.userName,
+        appState.userName,
         testCategory,
     ])
 
     return (
         <>
-            <SectionTitle title={`${state.userName}! Twój wynik to`} />
+            <SectionTitle title={`${appState.userName}! ${localization.summary.yourResult}`} />
             <Typography
                 variant='h4'
                 fontWeight={600}
@@ -102,7 +111,11 @@ const Summary: React.FC<SummaryProps> = ({ testCategory, onRestartTestClick }) =
                 </span>
                 <span>{endMessage}</span>
             </Typography>
-            <MainButton navigateTo='' title='Powtórz test' handleClick={onRestartTestClick} />
+            <MainButton
+                navigateTo=''
+                title={localization.summary.repeatTest}
+                handleClick={onRestartTestClick}
+            />
             {isMath ? (
                 <AnswersList
                     answerList={mathState.answerList}

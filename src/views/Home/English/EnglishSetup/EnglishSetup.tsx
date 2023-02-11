@@ -9,11 +9,13 @@ import EnContext from 'contexts/EnContext'
 import { sliderValueToTestLength } from 'utils/appUtils'
 import { localStorageKeys } from 'utils/constants'
 import { EnTopic, enTopics } from 'types/enTypes'
+import AppContext from 'contexts/AppContext'
 
 const EnglishSetup: React.FC = () => {
     const { enState, enDispatch } = useContext(EnContext)
+    const { appState, appDispatch, localization } = useContext(AppContext)
 
-    const [userName, setUserName] = useState<string>(enState.userName)
+    const [userName, setUserName] = useState<string>(appState.userName)
     const [topic, setTopic] = useState<EnTopic>(enState.topic)
     const [incorrectName, setIncorrectName] = useState<boolean>(false)
     const [validateForm, setValidateForm] = useState<boolean>(false)
@@ -35,7 +37,7 @@ const EnglishSetup: React.FC = () => {
         if (selectedTopic) {
             setTopic(selectedTopic)
         } else {
-            throw new Error("invalid topic was selected in 'Temat' select input")
+            throw new Error('invalid topic was selected in the english select input')
         }
     }
 
@@ -53,7 +55,7 @@ const EnglishSetup: React.FC = () => {
             )
             window.localStorage.setItem(localStorageKeys.english.TEST_LENGTH, testLength.toString())
 
-            enDispatch({ type: 'setUserName', value: userName })
+            appDispatch({ type: 'setUserName', value: userName })
             enDispatch({ type: 'setTopic', value: topic })
             enDispatch({ type: 'setTestLength', value: testLength })
         }
@@ -61,16 +63,16 @@ const EnglishSetup: React.FC = () => {
 
     return (
         <>
-            <SectionTitle title='Ustawienia' />
+            <SectionTitle title={localization.setup.settings} />
             <InputField
                 value={userName}
-                label='Twoje imię'
+                label={localization.setup.yourName}
                 setValue={setUserName}
                 error={validateForm && incorrectName}
                 helperText={validateForm && incorrectName ? 'Imię musi mieć od 3 do 20 znaków' : ''}
             />
             <SliderInput
-                label='Liczba pytań'
+                label={localization.setup.numberOfQuestions}
                 value={testLengthSliderValue}
                 setValue={setTestLengthSliderValue}
                 minValue={2}
@@ -79,7 +81,7 @@ const EnglishSetup: React.FC = () => {
             />
             <SelectMenu
                 value={topic.itemValue}
-                label='Działanie'
+                label={localization.setup.topic}
                 setValue={setTopicSelect}
                 itemList={enTopics}
             />

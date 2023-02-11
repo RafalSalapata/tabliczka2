@@ -123,11 +123,6 @@ const house: Phrase[] = [
         cz: '',
     },
     {
-        en: ['behind'],
-        pl: 'za',
-        cz: '',
-    },
-    {
         en: ['carpet'],
         pl: 'dywan',
         cz: '',

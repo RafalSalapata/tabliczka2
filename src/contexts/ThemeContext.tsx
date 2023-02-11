@@ -2,6 +2,7 @@ import { createTheme, Theme, ThemeProvider } from '@mui/material'
 import { blue, grey, lightBlue } from '@mui/material/colors'
 import { createContext, useMemo, useState } from 'react'
 import { ThemeContextType, ThemeMode } from 'types/appTypes'
+import { localStorageKeys } from 'utils/constants'
 
 declare module '@mui/material/styles' {
     interface Theme {
@@ -33,7 +34,9 @@ export const ThemeContext = createContext<ThemeContextType>({
 
 export const ThemeContextProvider = ({ children }: { children: JSX.Element }) => {
     const [mode, setMode] = useState<ThemeMode>(
-        localStorage.getItem('themeMode') === ThemeMode.dark ? ThemeMode.dark : ThemeMode.light
+        localStorage.getItem(localStorageKeys.app.THEME_MODE) === ThemeMode.dark
+            ? ThemeMode.dark
+            : ThemeMode.light
     )
 
     const themeMode = useMemo(
