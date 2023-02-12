@@ -49,7 +49,7 @@ const Navigation: React.FC = () => {
         '/angielski/ubrania-2': localization.testName.clothes,
         '/angielski/kolory-1': localization.testName.colorsEasy,
         '/angielski/kolory-2': localization.testName.colors,
-        '/angielski/dom': localization.testName.hause,
+        '/angielski/dom': localization.testName.house,
         '/angielski/polozenie': localization.testName.positions,
         '/angielski/liczby-1': localization.testName.numbersEasy,
         '/angielski/liczby-2': localization.testName.numbers,

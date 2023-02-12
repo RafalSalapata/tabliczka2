@@ -26,6 +26,8 @@ import AnswersListMath from 'components/AnswersListMath/AnswersListMath'
 import AppContext from 'contexts/AppContext'
 import { createdAtToString, durationToString, rangeToString, ratingValue } from 'utils/resultsUtils'
 import { RecordTypeWithId, TestCategoryType } from 'types/appTypes'
+import { topicToDisplayText } from 'utils/englishUtils'
+import { operationToDisplayText } from 'utils/mathUtils'
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean
@@ -134,11 +136,20 @@ const ResultCard: React.FC<ResultCardProps> = ({ record }) => {
                 <Box sx={{ color: 'text.primary', fontSize: { xs: '17px', sm: '19px' } }}>
                     {isMath ? (
                         <span>
-                            <b>{record.mathTest?.basicOperation.itemText} </b>
+                            <b>
+                                {record.mathTest &&
+                                    operationToDisplayText(
+                                        record.mathTest?.basicOperation.itemValue,
+                                        localization
+                                    )}
+                            </b>{' '}
                             {record.mathTest && rangeToString(record.mathTest.range)}
                         </span>
                     ) : (
-                        <b>{record.enTest && record.enTest.topic.itemText}</b>
+                        <b>
+                            {record.enTest &&
+                                topicToDisplayText(record.enTest.topic.itemValue, localization)}
+                        </b>
                     )}
                     <Typography
                         component={'span'}

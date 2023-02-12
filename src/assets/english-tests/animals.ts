@@ -25,6 +25,9 @@ const animals: Phrase[] = [
     { en: ['fly', 'housefly'], pl: 'mucha', cz: 'moucha' },
     { en: ['turtle', 'tortoise'], pl: 'zółw', cz: 'želva' },
     { en: ['parrot'], pl: 'papuga', cz: 'papoušek' },
+    { en: ['paw'], pl: 'łapa', cz: 'tlapka' },
+    { en: ['tail'], pl: 'ogon', cz: 'ocas' },
+    { en: ['wing'], pl: 'skrzydło', cz: 'křídlo' },
 ]
 
 export const test = testTrimer(animals)

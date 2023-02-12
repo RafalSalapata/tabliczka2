@@ -10,6 +10,7 @@ import {
 } from '@mui/material'
 import AppContext from 'contexts/AppContext'
 import { EnAnswer } from 'types/enTypes'
+import { LanguageValue } from 'types/appTypes'
 import { sxClasses } from './styles'
 
 interface AnswersListEnProps {
@@ -18,7 +19,8 @@ interface AnswersListEnProps {
 }
 
 const AnswersListEn: React.FC<AnswersListEnProps> = ({ answerList, topMarginOn = true }) => {
-    const { localization } = useContext(AppContext)
+    const { appState, localization } = useContext(AppContext)
+
     return (
         <TableContainer
             component={Paper}
@@ -34,6 +36,10 @@ const AnswersListEn: React.FC<AnswersListEnProps> = ({ answerList, topMarginOn =
                 </TableHead>
                 <TableBody>
                     {answerList.map((answer) => {
+                        const questionPhrase =
+                            appState.language === LanguageValue.pl
+                                ? answer.phrase.pl
+                                : answer.phrase.cz
                         return (
                             <TableRow
                                 key={answer.id}
@@ -60,7 +66,7 @@ const AnswersListEn: React.FC<AnswersListEnProps> = ({ answerList, topMarginOn =
                                         !answer.isCorrect && sxClasses.colorWhite,
                                     ]}
                                 >
-                                    {`${answer.phrase.pl} = "${answer.answer}"${
+                                    {`${questionPhrase} = "${answer.answer}"${
                                         answer.isCorrect
                                             ? ''
                                             : `, ${

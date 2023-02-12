@@ -22,7 +22,7 @@ export const localization: LocalizationType = {
             clothes: 'Ubrania 2',
             colorsEasy: 'Kolory 1',
             colors: 'kolory 2',
-            hause: 'Dom',
+            house: 'Dom',
             numbersEasy: 'Liczby 1-10',
             numbers: 'Liczby 1-20',
             positions: 'Położenie',
@@ -80,7 +80,7 @@ export const localization: LocalizationType = {
             clothes: 'Oblečení 2',
             colorsEasy: 'Kolory 1',
             colors: 'kolory 2',
-            hause: 'Doma',
+            house: 'Doma',
             numbersEasy: 'Čísla 1-10',
             numbers: 'Čísla 1-20',
             positions: 'Pozice',
@@ -98,7 +98,7 @@ export const localization: LocalizationType = {
         test: {
             questionNo: 'Otázka č. ',
             translate: 'Přeložit:',
-            howMuch: 'Jak moc je',
+            howMuch: 'Jak moc je: ',
             nextQuestion: 'Další otázka',
             lazyLoadingError:
                 'Jejda! Něco se pokazilo. Zkontrolujte prosím své internetové připojení.',

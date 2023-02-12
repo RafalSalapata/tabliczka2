@@ -10,6 +10,8 @@ import AppContext from 'contexts/AppContext'
 import { MathRangeType, BasicOperation, basicOperations } from 'types/mathTypes'
 import { localStorageKeys } from 'utils/constants'
 import { sliderValueToTestLength } from 'utils/appUtils'
+import { operationToDisplayText } from 'utils/mathUtils'
+import { SelectItem } from 'types/appTypes'
 
 const MathSetup: React.FC = () => {
     const { mathState, mathDispatch } = useContext(MathContext)
@@ -38,7 +40,7 @@ const MathSetup: React.FC = () => {
         if (operation) {
             setMathOperation(operation)
         } else {
-            throw new Error("invalid BasicOperation was selected in 'Działanie' select input")
+            throw new Error('invalid BasicOperation was selected in math select input')
         }
     }
 
@@ -91,7 +93,12 @@ const MathSetup: React.FC = () => {
                 value={mathOperation.itemValue}
                 label={localization.setup.operation}
                 setValue={setMathOperationSelect}
-                itemList={basicOperations}
+                itemList={basicOperations.map((operation): SelectItem => {
+                    return {
+                        itemValue: operation.itemValue,
+                        itemText: operationToDisplayText(operation.itemValue, localization),
+                    }
+                })}
             />
             <SliderInput
                 label={localization.setup.range}

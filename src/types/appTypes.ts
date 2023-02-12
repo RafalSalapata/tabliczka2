@@ -54,7 +54,7 @@ export const LanguageValue = {
 
 export type LanguageType = typeof LanguageValue[keyof typeof LanguageValue]
 
-type Sentences = {
+export type Sentences = {
     home: {
         lesson: string
         math: string
@@ -75,7 +75,7 @@ type Sentences = {
         clothes: string
         colorsEasy: string
         colors: string
-        hause: string
+        house: string
         numbersEasy: string
         numbers: string
         positions: string

@@ -1,3 +1,4 @@
+import { Sentences } from 'types/appTypes'
 import { BasicOperationValue, BasicOperationValueType } from 'types/mathTypes'
 
 const getDivisors = (n: number): number[] => {
@@ -67,4 +68,34 @@ export const getCorrectAnswer = (
     }
 
     return correctAnswer
+}
+
+export const operationToDisplayText = (
+    operation: BasicOperationValueType,
+    localization: Sentences
+): string => {
+    let displayText = ''
+
+    const exhaustiveCheck = (x: never) => {
+        throw new Error('check if all possible values are listed in the switch below')
+    }
+
+    switch (operation) {
+        case BasicOperationValue.addition:
+            displayText = localization.testName.addition
+            break
+        case BasicOperationValue.subtraction:
+            displayText = localization.testName.subtraction
+            break
+        case BasicOperationValue.multiplication:
+            displayText = localization.testName.multiplication
+            break
+        case BasicOperationValue.division:
+            displayText = localization.testName.division
+            break
+        default:
+            exhaustiveCheck(operation)
+    }
+
+    return displayText
 }

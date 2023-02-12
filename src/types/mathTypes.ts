@@ -1,5 +1,3 @@
-import { SelectItem } from './appTypes'
-
 export const BasicOperationValue = {
     addition: 'addition',
     subtraction: 'subtraction',
@@ -9,7 +7,7 @@ export const BasicOperationValue = {
 
 export type BasicOperationValueType = typeof BasicOperationValue[keyof typeof BasicOperationValue]
 
-export type BasicOperation = SelectItem & {
+export type BasicOperation = {
     itemValue: BasicOperationValueType
     readonly path: string
     readonly sign: string
@@ -18,25 +16,21 @@ export type BasicOperation = SelectItem & {
 export const basicOperations: readonly BasicOperation[] = [
     {
         itemValue: BasicOperationValue.addition,
-        itemText: 'Dodawanie',
         path: 'dodawanie',
         sign: '+',
     },
     {
         itemValue: BasicOperationValue.subtraction,
-        itemText: 'Odejmowanie',
         path: 'odejmowanie',
         sign: '-',
     },
     {
         itemValue: BasicOperationValue.multiplication,
-        itemText: 'Mnożenie',
         path: 'mnozenie',
         sign: 'x',
     },
     {
         itemValue: BasicOperationValue.division,
-        itemText: 'Dzielenie',
         path: 'dzielenie',
         sign: ':',
     },
@@ -45,17 +39,11 @@ export const basicOperations: readonly BasicOperation[] = [
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isBasicOperation = (arg: any): arg is BasicOperation => {
     const value = arg.itemValue
-    const text = arg.itemText
     const path = arg.path
     const sign = arg.sign
 
     const propsCheck = (operation: BasicOperation): boolean => {
-        return (
-            operation.itemValue === value &&
-            operation.itemText === text &&
-            operation.path === path &&
-            operation.sign === sign
-        )
+        return operation.itemValue === value && operation.path === path && operation.sign === sign
     }
 
     return basicOperations.map((operation) => propsCheck(operation)).some((x) => x)

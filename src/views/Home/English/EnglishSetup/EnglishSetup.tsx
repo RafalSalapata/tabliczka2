@@ -10,6 +10,8 @@ import { sliderValueToTestLength } from 'utils/appUtils'
 import { localStorageKeys } from 'utils/constants'
 import { EnTopic, enTopics } from 'types/enTypes'
 import AppContext from 'contexts/AppContext'
+import { SelectItem } from 'types/appTypes'
+import { topicToDisplayText } from 'utils/englishUtils'
 
 const EnglishSetup: React.FC = () => {
     const { enState, enDispatch } = useContext(EnContext)
@@ -83,7 +85,12 @@ const EnglishSetup: React.FC = () => {
                 value={topic.itemValue}
                 label={localization.setup.topic}
                 setValue={setTopicSelect}
-                itemList={enTopics}
+                itemList={enTopics.map((topic): SelectItem => {
+                    return {
+                        itemValue: topic.itemValue,
+                        itemText: topicToDisplayText(topic.itemValue, localization),
+                    }
+                })}
             />
             <MainButton
                 title='Start'
