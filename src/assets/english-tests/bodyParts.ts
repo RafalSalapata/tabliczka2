@@ -23,7 +23,7 @@ const bodyParts: Phrase[] = [
         cz: 'koleno',
     },
     {
-        en: ['hart'],
+        en: ['heart'],
         pl: 'serce',
         cz: 'srdce',
     },
@@ -48,7 +48,7 @@ const bodyParts: Phrase[] = [
         cz: 'kost',
     },
     {
-        en: ['backbone'],
+        en: ['backbone', 'spine'],
         pl: 'kręgosłup',
         cz: 'páteř',
     },
@@ -58,7 +58,7 @@ const bodyParts: Phrase[] = [
         cz: 'vlasy',
     },
     {
-        en: ['blod'],
+        en: ['blood'],
         pl: 'krew',
         cz: 'krev',
     },

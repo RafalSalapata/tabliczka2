@@ -18,7 +18,7 @@ const family: Phrase[] = [
         cz: 'táto',
     },
     {
-        en: ['mum', 'mummy'],
+        en: ['mom', 'mommy', 'mammy'],
         pl: 'mama',
         cz: 'maminka',
     },
@@ -38,7 +38,7 @@ const family: Phrase[] = [
         cz: 'dědeček',
     },
     {
-        en: ['grandad'],
+        en: ['grandad', 'grandpa'],
         pl: 'dziadzio',
         cz: 'děda',
     },
