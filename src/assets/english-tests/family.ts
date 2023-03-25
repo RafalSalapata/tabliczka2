@@ -48,7 +48,7 @@ const family: Phrase[] = [
         cz: 'babička',
     },
     {
-        en: ['granny'],
+        en: ['granny', 'grandma'],
         pl: 'babunia',
         cz: 'babi',
     },

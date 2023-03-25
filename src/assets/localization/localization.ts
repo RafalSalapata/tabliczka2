@@ -27,6 +27,7 @@ export const localization: LocalizationType = {
             numbers: 'Liczby 1-20',
             positions: 'Położenie',
             time: 'Czas',
+            unit4: 'Unit 4',
         },
         setup: {
             settings: 'Ustawienia',
@@ -85,6 +86,7 @@ export const localization: LocalizationType = {
             numbers: 'Čísla 1-20',
             positions: 'Pozice',
             time: 'Čas',
+            unit4: 'Unit 4',
         },
         setup: {
             settings: 'Nastavení',

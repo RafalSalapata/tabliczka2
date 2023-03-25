@@ -53,8 +53,38 @@ const bodyParts: Phrase[] = [
         cz: 'páteř',
     },
     {
-        en: ['hair'],
-        pl: 'włosy',
+        en: ['blond hair'],
+        pl: 'włosy blond',
+        cz: 'vlasy',
+    },
+    {
+        en: ['curly hair'],
+        pl: 'włosy kręcone',
+        cz: 'vlasy',
+    },
+    {
+        en: ['blond hair'],
+        pl: 'włosy blond',
+        cz: 'vlasy',
+    },
+    {
+        en: ['dark hair'],
+        pl: 'włosy ciemne',
+        cz: 'vlasy',
+    },
+    {
+        en: ['spiky hair'],
+        pl: 'włosy nastroszone',
+        cz: 'vlasy',
+    },
+    {
+        en: ['straight hair'],
+        pl: 'włosy proste',
+        cz: 'vlasy',
+    },
+    {
+        en: ['wavy hair'],
+        pl: 'włosy faliste',
         cz: 'vlasy',
     },
     {

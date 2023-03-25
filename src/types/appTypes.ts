@@ -80,6 +80,7 @@ export type Sentences = {
         numbers: string
         positions: string
         time: string
+        unit4: string
     }
     setup: {
         settings: string

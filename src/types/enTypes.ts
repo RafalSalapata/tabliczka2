@@ -12,6 +12,7 @@ export const EnTopicValue = {
     numbers: 'numbers',
     positions: 'positions',
     time: 'time',
+    unit4: 'unit4',
 } as const
 
 export type EnTopicValueType = typeof EnTopicValue[keyof typeof EnTopicValue]
@@ -35,6 +36,7 @@ export const enTopics: readonly EnTopic[] = [
     { itemValue: EnTopicValue.numbers, path: 'liczby-2' },
     { itemValue: EnTopicValue.positions, path: 'polozenie' },
     { itemValue: EnTopicValue.time, path: 'czas' },
+    { itemValue: EnTopicValue.unit4, path: 'unit4' },
 ] as const
 
 // arg below is comming from local storage hence we don't know its type

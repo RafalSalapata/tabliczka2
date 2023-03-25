@@ -61,6 +61,9 @@ export const topicToDisplayText = (topic: EnTopicValueType, localization: Senten
         case 'time':
             displayText = localization.testName.time
             break
+        case 'unit4':
+            displayText = localization.testName.unit4
+            break
         default:
             exhaustiveCheck(topic)
     }

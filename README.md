@@ -14,3 +14,4 @@ The application is deployed via Firebase Hosting under this addrss: https://tabl
 2.1.1 - input field in en test was improved,<br/>
 2.2.0 - Czech language was added,<br/>
 2.2.1 - small fix: corected typo in english answers<br/>
+2.2.2 - add unit 4 to english tests<br/>
